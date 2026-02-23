@@ -55,10 +55,10 @@ ERP-Concesionario
 
 | Rol | Integrante |
 |------|------------|
-| Líder Técnico | Juan Pablo Rojas |
-| Scrum Master | David Santiago |
+| Scrum Master  | Juan Pablo Rojas |
+| Product Owner | David Santiago |
 | Líder Base de Datos e Integración | Felipe |
-| Líder de Calidad | Hayder |
+| Líder Técnico | Hayder |
 
 ---
 
