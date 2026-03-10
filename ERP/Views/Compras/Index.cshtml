@@ -1,0 +1,60 @@
+@model IEnumerable<ERP.Models.Compra>
+
+<h2>Compras</h2>
+
+<a asp-action="Crear" class="btn btn-success">
+Nueva Compra
+</a>
+
+<br />
+<br />
+
+<table class="table table-bordered">
+
+<thead>
+
+<tr>
+<th>ID</th>
+<th>Proveedor</th>
+<th>Fecha</th>
+<th>Total</th>
+<th>Acciones</th>
+</tr>
+
+</thead>
+
+<tbody>
+
+@foreach(var c in Model)
+{
+
+<tr>
+
+<td>@c.IdCompra</td>
+<td>@c.NombreProveedor</td>
+<td>@c.Fecha.ToShortDateString()</td>
+<td>@c.Total</td>
+
+<td>
+
+<a asp-action="Editar"
+asp-route-id="@c.IdCompra"
+class="btn btn-warning btn-sm">
+Editar
+</a>
+
+<a asp-action="Eliminar"
+asp-route-id="@c.IdCompra"
+class="btn btn-danger btn-sm">
+Eliminar
+</a>
+
+</td>
+
+</tr>
+
+}
+
+</tbody>
+
+</table>

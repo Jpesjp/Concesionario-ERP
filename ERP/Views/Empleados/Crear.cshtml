@@ -1,0 +1,28 @@
+@model ERP.Models.Empleado
+
+<h2>Nuevo Empleado</h2>
+
+<form asp-action="Crear">
+
+<div class="form-group">
+<label>Nombre</label>
+<input asp-for="Nombre" class="form-control"/>
+</div>
+
+<div class="form-group">
+<label>Cargo</label>
+<input asp-for="Cargo" class="form-control"/>
+</div>
+
+<div class="form-group">
+<label>Salario</label>
+<input asp-for="Salario" class="form-control"/>
+</div>
+
+<br>
+
+<button class="btn btn-primary">
+Guardar
+</button>
+
+</form>

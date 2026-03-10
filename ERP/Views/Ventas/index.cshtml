@@ -15,6 +15,7 @@ Nueva Venta
 <th>Producto</th>
 <th>Cantidad</th>
 <th>Total</th>
+<th>Fecha</th>
 <th>Acciones</th>
 </tr>
 </thead>
@@ -26,22 +27,23 @@ Nueva Venta
 <tr>
 
 <td>@v.IdVenta</td>
-<td>@v.IdCliente</td>
-<td>@v.IdProducto</td>
+<td>@v.NombreCliente</td>
+<td>@v.NombreProducto</td>
 <td>@v.Cantidad</td>
 <td>@v.Total</td>
+<td>@v.Fecha.ToShortDateString()</td>
 
 <td>
 
 <a asp-action="Editar"
-   asp-route-id="@v.IdVenta"
-   class="btn btn-warning btn-sm">
+asp-route-id="@v.IdVenta"
+class="btn btn-warning btn-sm">
 Editar
 </a>
 
 <a asp-action="Eliminar"
-   asp-route-id="@v.IdVenta"
-   class="btn btn-danger btn-sm">
+asp-route-id="@v.IdVenta"
+class="btn btn-danger btn-sm">
 Eliminar
 </a>
 
@@ -51,5 +53,4 @@ Eliminar
 }
 
 </tbody>
-
 </table>

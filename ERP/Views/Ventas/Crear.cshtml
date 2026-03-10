@@ -1,29 +1,53 @@
 @model ERP.Models.Venta
 
-<h2>Registrar Venta</h2>
+<h2>Nueva Venta</h2>
 
 <form asp-action="Crear" method="post">
 
-<div class="mb-3">
-<label>ID Cliente</label>
-<input asp-for="IdCliente" class="form-control"/>
+<div class="form-group">
+<label>Cliente</label>
+
+<select asp-for="IdCliente" class="form-control">
+
+@foreach (var c in ViewBag.Clientes)
+{
+<option value="@c.IdCliente">
+@c.IdCliente - @c.Nombre
+</option>
+}
+
+</select>
+
 </div>
 
-<div class="mb-3">
-<label>ID Producto</label>
-<input asp-for="IdProducto" class="form-control"/>
+<div class="form-group">
+<label>Producto</label>
+
+<select asp-for="IdProducto" class="form-control">
+
+@foreach (var p in ViewBag.Productos)
+{
+<option value="@p.IdProducto">
+@p.IdProducto - @p.Nombre
+</option>
+}
+
+</select>
+
 </div>
 
-<div class="mb-3">
+<div class="form-group">
 <label>Cantidad</label>
 <input asp-for="Cantidad" class="form-control"/>
 </div>
+
+<br>
 
 <button type="submit" class="btn btn-success">
 Guardar Venta
 </button>
 
-<a href="/Ventas" class="btn btn-secondary">
+<a asp-action="Index" class="btn btn-secondary">
 Cancelar
 </a>
 

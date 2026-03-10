@@ -1,0 +1,60 @@
+@model IEnumerable<ERP.Models.Empleado>
+
+<h2>Empleados</h2>
+
+<a asp-action="Crear" class="btn btn-success">
+Nuevo Empleado
+</a>
+
+<br />
+<br />
+
+<table class="table table-bordered">
+
+<thead>
+<tr>
+
+<th>ID</th>
+<th>Nombre</th>
+<th>Cargo</th>
+<th>Salario</th>
+<th>Acciones</th>
+
+</tr>
+</thead>
+
+<tbody>
+
+@foreach(var e in Model)
+{
+
+<tr>
+
+<td>@e.IdEmpleado</td>
+<td>@e.Nombre</td>
+<td>@e.Cargo</td>
+<td>@e.Salario</td>
+
+<td>
+
+<a asp-action="Editar"
+asp-route-id="@e.IdEmpleado"
+class="btn btn-warning btn-sm">
+Editar
+</a>
+
+<a asp-action="Eliminar"
+asp-route-id="@e.IdEmpleado"
+class="btn btn-danger btn-sm">
+Eliminar
+</a>
+
+</td>
+
+</tr>
+
+}
+
+</tbody>
+
+</table>

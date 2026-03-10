@@ -1,0 +1,45 @@
+<h1>Dashboard ERP</h1>
+
+<div style="display:flex;gap:30px">
+
+<div class="card p-3">
+<h3>Clientes</h3>
+<h2>@ViewBag.Clientes</h2>
+</div>
+
+<div class="card p-3">
+<h3>Productos</h3>
+<h2>@ViewBag.Productos</h2>
+</div>
+
+<div class="card p-3">
+<h3>Ventas</h3>
+<h2>@ViewBag.Ventas</h2>
+</div>
+
+</div>
+
+<br>
+
+<h3>Ventas por Mes</h3>
+
+<canvas id="graficoVentas"></canvas>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+
+var ctx = document.getElementById('graficoVentas');
+
+new Chart(ctx, {
+type: 'bar',
+data: {
+labels: ['Enero','Febrero','Marzo','Abril','Mayo','Junio'],
+datasets: [{
+label: 'Ventas',
+data: [5,8,6,10,7,12]
+}]
+}
+});
+
+</script>

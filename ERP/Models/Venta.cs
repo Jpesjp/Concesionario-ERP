@@ -13,5 +13,9 @@ namespace ERP.Models
         public decimal Total { get; set; }
 
         public DateTime Fecha { get; set; }
+
+        public string NombreCliente { get; set; }
+
+        public string NombreProducto { get; set; }
     }
 }
