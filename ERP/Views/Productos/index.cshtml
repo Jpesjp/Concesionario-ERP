@@ -2,24 +2,52 @@
 
 <h2>Productos</h2>
 
-<table class="table table-striped">
-    <thead>
-        <tr>
-            <th>ID</th>
-            <th>Nombre</th>
-            <th>Precio</th>
-            <th>Stock</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var producto in Model)
-        {
-            <tr>
-                <td>@producto.IdProducto</td>
-                <td>@producto.Nombre</td>
-                <td>@producto.Precio</td>
-                <td>@producto.Stock</td>
-            </tr>
-        }
-    </tbody>
+<a asp-action="Crear" class="btn btn-success mb-3">
+Nuevo Producto
+</a>
+
+<table class="table table-bordered">
+
+<thead>
+<tr>
+<th>ID</th>
+<th>Nombre</th>
+<th>Precio</th>
+<th>Stock</th>
+<th>Acciones</th>
+</tr>
+</thead>
+
+<tbody>
+
+@foreach (var p in Model)
+{
+<tr>
+
+<td>@p.IdProducto</td>
+<td>@p.Nombre</td>
+<td>@p.Precio</td>
+<td>@p.Stock</td>
+
+<td>
+
+<a asp-action="Editar"
+asp-route-id="@p.IdProducto"
+class="btn btn-warning btn-sm">
+Editar
+</a>
+
+<a asp-action="Eliminar"
+asp-route-id="@p.IdProducto"
+class="btn btn-danger btn-sm">
+Eliminar
+</a>
+
+</td>
+
+</tr>
+}
+
+</tbody>
+
 </table>

@@ -1,0 +1,30 @@
+@model ERP.Models.Venta
+
+<h2>Registrar Venta</h2>
+
+<form asp-action="Crear" method="post">
+
+<div class="mb-3">
+<label>ID Cliente</label>
+<input asp-for="IdCliente" class="form-control"/>
+</div>
+
+<div class="mb-3">
+<label>ID Producto</label>
+<input asp-for="IdProducto" class="form-control"/>
+</div>
+
+<div class="mb-3">
+<label>Cantidad</label>
+<input asp-for="Cantidad" class="form-control"/>
+</div>
+
+<button type="submit" class="btn btn-success">
+Guardar Venta
+</button>
+
+<a href="/Ventas" class="btn btn-secondary">
+Cancelar
+</a>
+
+</form>

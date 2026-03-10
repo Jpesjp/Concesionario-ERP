@@ -2,24 +2,54 @@
 
 <h2>Ventas</h2>
 
-<table class="table table-hover">
-    <thead>
-        <tr>
-            <th>ID</th>
-            <th>ID Cliente</th>
-            <th>Fecha</th>
-            <th>Total</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var venta in Model)
-        {
-            <tr>
-                <td>@venta.IdVenta</td>
-                <td>@venta.IdCliente</td>
-                <td>@venta.Fecha.ToShortDateString()</td>
-                <td>@venta.Total</td>
-            </tr>
-        }
-    </tbody>
+<a asp-action="Crear" class="btn btn-success mb-3">
+Nueva Venta
+</a>
+
+<table class="table table-bordered">
+
+<thead>
+<tr>
+<th>ID</th>
+<th>Cliente</th>
+<th>Producto</th>
+<th>Cantidad</th>
+<th>Total</th>
+<th>Acciones</th>
+</tr>
+</thead>
+
+<tbody>
+
+@foreach (var v in Model)
+{
+<tr>
+
+<td>@v.IdVenta</td>
+<td>@v.IdCliente</td>
+<td>@v.IdProducto</td>
+<td>@v.Cantidad</td>
+<td>@v.Total</td>
+
+<td>
+
+<a asp-action="Editar"
+   asp-route-id="@v.IdVenta"
+   class="btn btn-warning btn-sm">
+Editar
+</a>
+
+<a asp-action="Eliminar"
+   asp-route-id="@v.IdVenta"
+   class="btn btn-danger btn-sm">
+Eliminar
+</a>
+
+</td>
+
+</tr>
+}
+
+</tbody>
+
 </table>
