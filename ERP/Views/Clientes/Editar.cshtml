@@ -1,0 +1,37 @@
+@model ERP.Models.Cliente
+
+<h2>Editar Cliente</h2>
+
+<form asp-action="Editar">
+
+<input type="hidden" asp-for="IdCliente" />
+
+<div class="mb-3">
+<label>Nombre</label>
+<input asp-for="Nombre" class="form-control"/>
+</div>
+
+<div class="mb-3">
+<label>Telefono</label>
+<input asp-for="Telefono" class="form-control"/>
+</div>
+
+<div class="mb-3">
+<label>Email</label>
+<input asp-for="Email" class="form-control"/>
+</div>
+
+<div class="mb-3">
+<label>Direccion</label>
+<input asp-for="Direccion" class="form-control"/>
+</div>
+
+<button type="submit" class="btn btn-primary">
+Guardar Cambios
+</button>
+
+<a asp-action="Index" class="btn btn-secondary">
+Volver
+</a>
+
+</form>

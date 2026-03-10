@@ -1,0 +1,25 @@
+@model IEnumerable<ERP.Models.Venta>
+
+<h2>Ventas</h2>
+
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>ID Cliente</th>
+            <th>Fecha</th>
+            <th>Total</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var venta in Model)
+        {
+            <tr>
+                <td>@venta.IdVenta</td>
+                <td>@venta.IdCliente</td>
+                <td>@venta.Fecha.ToShortDateString()</td>
+                <td>@venta.Total</td>
+            </tr>
+        }
+    </tbody>
+</table>

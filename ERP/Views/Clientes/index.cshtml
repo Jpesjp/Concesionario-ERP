@@ -1,0 +1,55 @@
+@model IEnumerable<ERP.Models.Cliente>
+
+<h2>Clientes</h2>
+
+<a asp-action="Crear" class="btn btn-success mb-3">
+Nuevo Cliente
+</a>
+
+<table class="table table-bordered">
+
+<thead>
+<tr>
+<th>ID</th>
+<th>Nombre</th>
+<th>Telefono</th>
+<th>Email</th>
+<th>Direccion</th>
+<th>Acciones</th>
+</tr>
+</thead>
+
+<tbody>
+
+@foreach (var cliente in Model)
+{
+<tr>
+
+<td>@cliente.IdCliente</td>
+<td>@cliente.Nombre</td>
+<td>@cliente.Telefono</td>
+<td>@cliente.Email</td>
+<td>@cliente.Direccion</td>
+
+<td>
+
+<a asp-action="Editar"
+asp-route-id="@cliente.IdCliente"
+class="btn btn-warning btn-sm">
+Editar
+</a>
+
+<a asp-action="Eliminar"
+asp-route-id="@cliente.IdCliente"
+class="btn btn-danger btn-sm"
+onclick="return confirm('¿Eliminar cliente?')">
+Eliminar
+</a>
+
+</td>
+
+</tr>
+}
+
+</tbody>
+</table>
