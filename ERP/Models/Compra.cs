@@ -11,5 +11,9 @@ namespace ERP.Models
         public decimal Total { get; set; }
 
         public string? NombreProveedor { get; set; }
+
+        public int IdProducto { get; set; }
+
+        public int Cantidad { get; set; }
     }
 }

@@ -5,13 +5,53 @@
 <form asp-action="Crear">
 
 <div class="form-group">
-<label>Proveedor (ID)</label>
-<input asp-for="IdProveedor" class="form-control"/>
+
+<label>Proveedor</label>
+
+<select asp-for="IdProveedor" class="form-control">
+
+@foreach(var p in ViewBag.Proveedores)
+{
+<option value="@p.IdProveedor">
+@p.IdProveedor - @p.Nombre
+</option>
+}
+
+</select>
+
 </div>
 
 <div class="form-group">
+
+<label>Producto</label>
+
+<select id="producto" asp-for="IdProducto" class="form-control">
+
+@foreach(var pr in ViewBag.Productos)
+{
+<option value="@pr.IdProducto" data-precio="@pr.Precio">
+@pr.IdProducto - @pr.Nombre
+</option>
+}
+
+</select>
+
+</div>
+
+<div class="form-group">
+
+<label>Cantidad</label>
+
+<input id="cantidad" asp-for="Cantidad" class="form-control"/>
+
+</div>
+
+<div class="form-group">
+
 <label>Total</label>
-<input asp-for="Total" class="form-control"/>
+
+<input id="total" asp-for="Total" class="form-control" readonly/>
+
 </div>
 
 <br>
@@ -21,3 +61,23 @@ Guardar
 </button>
 
 </form>
+
+<script>
+
+function calcularTotal(){
+
+var producto = document.getElementById("producto");
+var precio = producto.options[producto.selectedIndex].dataset.precio;
+
+var cantidad = document.getElementById("cantidad").value;
+
+var total = precio * cantidad;
+
+document.getElementById("total").value = total;
+
+}
+
+document.getElementById("producto").addEventListener("change",calcularTotal);
+document.getElementById("cantidad").addEventListener("keyup",calcularTotal);
+
+</script>

@@ -29,6 +29,14 @@ namespace ERP.Controllers
             SqlCommand c3 = new SqlCommand("SELECT COUNT(*) FROM Ventas", _connection);
             ventas = (int)c3.ExecuteScalar();
 
+            SqlCommand cmdEmpleados = new SqlCommand("SELECT COUNT(*) FROM Empleados", _connection);
+
+            ViewBag.TotalEmpleados = (int)cmdEmpleados.ExecuteScalar();
+
+            SqlCommand cmdSalarios = new SqlCommand( "SELECT SUM(Salario) FROM Empleados", _connection);
+
+            ViewBag.TotalSalarios = cmdSalarios.ExecuteScalar();
+
             _connection.Close();
 
             ViewBag.Clientes = clientes;
@@ -36,6 +44,9 @@ namespace ERP.Controllers
             ViewBag.Ventas = ventas;
 
             return View();
+
+
+            
         }
     }
 }

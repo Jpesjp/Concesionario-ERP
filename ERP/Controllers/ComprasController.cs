@@ -49,10 +49,45 @@ namespace ERP.Controllers
 
         public IActionResult Crear()
         {
+            List<Proveedor> proveedores = new List<Proveedor>();
+            List<Producto> productos = new List<Producto>();
+
+            _connection.Open();
+
+            SqlCommand cmdProv = new SqlCommand("SELECT * FROM Proveedores", _connection);
+            SqlDataReader readerProv = cmdProv.ExecuteReader();
+
+            while (readerProv.Read())
+            {
+                proveedores.Add(new Proveedor
+                {
+                    IdProveedor = (int)readerProv["IdProveedor"],
+                    Nombre = readerProv["Nombre"].ToString()
+                });
+            }
+
+            readerProv.Close();
+
+            SqlCommand cmdProd = new SqlCommand("SELECT * FROM Productos", _connection);
+            SqlDataReader readerProd = cmdProd.ExecuteReader();
+
+            while (readerProd.Read())
+            {
+                productos.Add(new Producto
+                {
+                    IdProducto = (int)readerProd["IdProducto"],
+                    Nombre = readerProd["Nombre"].ToString(),
+                    Precio = (decimal)readerProd["Precio"]
+                });
+            }
+
+            _connection.Close();
+
+            ViewBag.Proveedores = proveedores;
+            ViewBag.Productos = productos;
+
             return View();
         }
-
-
 
         [HttpPost]
         public IActionResult Crear(Compra compra)
@@ -60,9 +95,9 @@ namespace ERP.Controllers
             _connection.Open();
 
             SqlCommand cmd = new SqlCommand(
-                @"INSERT INTO Compras (IdProveedor,Fecha,Total)
-          VALUES (@Proveedor,@Fecha,@Total)",
-                _connection);
+            @"INSERT INTO Compras (IdProveedor,Fecha,Total)
+      VALUES (@Proveedor,@Fecha,@Total)",
+            _connection);
 
             cmd.Parameters.AddWithValue("@Proveedor", compra.IdProveedor);
             cmd.Parameters.AddWithValue("@Fecha", DateTime.Now);
@@ -70,11 +105,21 @@ namespace ERP.Controllers
 
             cmd.ExecuteNonQuery();
 
+            SqlCommand stock = new SqlCommand(
+            @"UPDATE Productos
+      SET Stock = Stock + @Cantidad
+      WHERE IdProducto = @Producto",
+            _connection);
+
+            stock.Parameters.AddWithValue("@Cantidad", compra.Cantidad);
+            stock.Parameters.AddWithValue("@Producto", compra.IdProducto);
+
+            stock.ExecuteNonQuery();
+
             _connection.Close();
 
             return RedirectToAction("Index");
         }
-
         public IActionResult Editar(int id)
         {
             Compra compra = new Compra();
