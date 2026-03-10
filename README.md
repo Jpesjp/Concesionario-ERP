@@ -121,5 +121,5 @@ Actualmente el proyecto se encuentra en configuración estructural y definición
 ## Licencia
 
 Proyecto académico  
-Universidad Manuela Beltrán  
+Universidad Manuela Beltrán.  
 Ingeniería de Software – 2026
