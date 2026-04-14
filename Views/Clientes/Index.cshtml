@@ -1,0 +1,47 @@
+@model IEnumerable<ERPConcesionario.Models.Cliente>
+
+@{
+    ViewData["Title"] = "Clientes";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <h1>Clientes</h1>
+    <a asp-action="Create" class="btn btn-primary">Nuevo Cliente</a>
+</div>
+
+<table class="table table-bordered table-striped table-hover">
+    <thead class="table-dark">
+        <tr>
+            <th>Código</th>
+            <th>Tipo</th>
+            <th>Documento</th>
+            <th>Nombre / Razón Social</th>
+            <th>Teléfono</th>
+            <th>Email</th>
+            <th>Estado</th>
+            <th style="width: 180px;">Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var cliente in Model)
+        {
+            <tr>
+                <td>@cliente.CodigoCliente</td>
+                <td>@cliente.TipoCliente</td>
+                <td>@cliente.TipoDocumento - @cliente.NumeroDocumento</td>
+                <td>
+                    @(cliente.TipoCliente == "NATURAL"
+                        ? $"{cliente.Nombres} {cliente.Apellidos}"
+                        : cliente.RazonSocial)
+                </td>
+                <td>@cliente.TelefonoPrincipal</td>
+                <td>@cliente.Email</td>
+                <td>@cliente.EstadoCliente</td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@cliente.IdCliente" class="btn btn-warning btn-sm">Editar</a>
+                    <a asp-action="Delete" asp-route-id="@cliente.IdCliente" class="btn btn-danger btn-sm">Eliminar</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

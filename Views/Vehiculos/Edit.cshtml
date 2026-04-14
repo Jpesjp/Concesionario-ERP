@@ -1,0 +1,145 @@
+@model ERPConcesionario.Models.VehiculoInventario
+
+@{
+    ViewData["Title"] = "Editar Vehículo";
+}
+
+<h1>Editar Vehículo</h1>
+
+<form asp-action="Edit" method="post">
+    <input type="hidden" asp-for="IdUnidadVehiculo" />
+
+    <div class="row">
+        <div class="col-md-3 mb-3">
+            <label asp-for="IdVersionVehiculo" class="form-label"></label>
+            <select asp-for="IdVersionVehiculo" asp-items="ViewBag.Versiones" class="form-control">
+                <option value="">Seleccione una versión</option>
+            </select>
+        </div>
+
+        <div class="col-md-3 mb-3">
+            <label asp-for="IdColor" class="form-label"></label>
+            <select asp-for="IdColor" asp-items="ViewBag.Colores" class="form-control">
+                <option value="">Seleccione un color</option>
+            </select>
+        </div>
+
+        <div class="col-md-3 mb-3">
+            <label asp-for="IdAlmacen" class="form-label"></label>
+            <select asp-for="IdAlmacen" asp-items="ViewBag.Almacenes" class="form-control">
+                <option value="">Seleccione un almacén</option>
+            </select>
+        </div>
+
+        <div class="col-md-3 mb-3">
+            <label asp-for="IdUbicacion" class="form-label"></label>
+            <select asp-for="IdUbicacion" asp-items="ViewBag.Ubicaciones" class="form-control">
+                <option value="">Seleccione una ubicación</option>
+            </select>
+        </div>
+
+        <div class="col-md-6 mb-3">
+            <label asp-for="VIN" class="form-label"></label>
+            <input asp-for="VIN" class="form-control" />
+        </div>
+
+        <div class="col-md-6 mb-3">
+            <label asp-for="NumeroMotor" class="form-label"></label>
+            <input asp-for="NumeroMotor" class="form-control" />
+        </div>
+
+        <div class="col-md-6 mb-3">
+            <label asp-for="Chasis" class="form-label"></label>
+            <input asp-for="Chasis" class="form-control" />
+        </div>
+
+        <div class="col-md-6 mb-3">
+            <label asp-for="Placa" class="form-label"></label>
+            <input asp-for="Placa" class="form-control" />
+        </div>
+
+        <div class="col-md-3 mb-3">
+            <label asp-for="AnioFabricacion" class="form-label"></label>
+            <input asp-for="AnioFabricacion" class="form-control" />
+        </div>
+
+        <div class="col-md-3 mb-3">
+            <label asp-for="AnioModelo" class="form-label"></label>
+            <input asp-for="AnioModelo" class="form-control" />
+        </div>
+
+        <div class="col-md-3 mb-3">
+            <label asp-for="TipoIngreso" class="form-label"></label>
+            <select asp-for="TipoIngreso" class="form-control">
+                <option value="COMPRA">COMPRA</option>
+                <option value="CONSIGNACION">CONSIGNACION</option>
+                <option value="TOMA_USADO">TOMA_USADO</option>
+            </select>
+        </div>
+
+        <div class="col-md-3 mb-3">
+            <label asp-for="CondicionVehiculo" class="form-label"></label>
+            <select asp-for="CondicionVehiculo" class="form-control">
+                <option value="NUEVO">NUEVO</option>
+                <option value="USADO">USADO</option>
+                <option value="DEMO">DEMO</option>
+            </select>
+        </div>
+
+        <div class="col-md-3 mb-3">
+            <label asp-for="Kilometraje" class="form-label"></label>
+            <input asp-for="Kilometraje" class="form-control" />
+        </div>
+
+        <div class="col-md-3 mb-3">
+            <label asp-for="CostoIngreso" class="form-label"></label>
+            <input asp-for="CostoIngreso" class="form-control" />
+        </div>
+
+        <div class="col-md-3 mb-3">
+            <label asp-for="GastosAcondicionamiento" class="form-label"></label>
+            <input asp-for="GastosAcondicionamiento" class="form-control" />
+        </div>
+
+        <div class="col-md-3 mb-3">
+            <label asp-for="PrecioLista" class="form-label"></label>
+            <input asp-for="PrecioLista" class="form-control" />
+        </div>
+
+        <div class="col-md-4 mb-3">
+            <label asp-for="PrecioMinimoVenta" class="form-label"></label>
+            <input asp-for="PrecioMinimoVenta" class="form-control" />
+        </div>
+
+        <div class="col-md-4 mb-3">
+            <label asp-for="EstadoUnidad" class="form-label"></label>
+            <select asp-for="EstadoUnidad" class="form-control">
+                <option value="DISPONIBLE">DISPONIBLE</option>
+                <option value="RESERVADO">RESERVADO</option>
+                <option value="VENDIDO">VENDIDO</option>
+                <option value="EN_TRANSITO">EN_TRANSITO</option>
+                <option value="EN_PREPARACION">EN_PREPARACION</option>
+                <option value="TALLER">TALLER</option>
+                <option value="BAJA">BAJA</option>
+            </select>
+        </div>
+
+        <div class="col-md-4 mb-3">
+            <label asp-for="FechaIngreso" class="form-label"></label>
+            <input asp-for="FechaIngreso" type="datetime-local" class="form-control" />
+        </div>
+
+        <div class="col-md-6 mb-3">
+            <label asp-for="FechaVenta" class="form-label"></label>
+            <input asp-for="FechaVenta" type="datetime-local" class="form-control" />
+        </div>
+
+        <div class="col-md-12 mb-3">
+            <label asp-for="Observaciones" class="form-label"></label>
+            <textarea asp-for="Observaciones" class="form-control"></textarea>
+        </div>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Actualizar</button>
+    <a asp-action="Index" class="btn btn-secondary">Volver</a>
+</form>

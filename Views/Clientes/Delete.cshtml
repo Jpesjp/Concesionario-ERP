@@ -1,0 +1,41 @@
+@model ERPConcesionario.Models.Cliente
+
+@{
+    ViewData["Title"] = "Eliminar Cliente";
+}
+
+<h1>Eliminar Cliente</h1>
+
+<div class="alert alert-warning">
+    ¿Estás seguro de que deseas eliminar este cliente?
+</div>
+
+<dl class="row">
+    <dt class="col-sm-3">Código</dt>
+    <dd class="col-sm-9">@Model.CodigoCliente</dd>
+
+    <dt class="col-sm-3">Tipo Cliente</dt>
+    <dd class="col-sm-9">@Model.TipoCliente</dd>
+
+    <dt class="col-sm-3">Documento</dt>
+    <dd class="col-sm-9">@Model.TipoDocumento - @Model.NumeroDocumento</dd>
+
+    <dt class="col-sm-3">Nombre / Razón Social</dt>
+    <dd class="col-sm-9">
+        @(Model.TipoCliente == "NATURAL"
+            ? $"{Model.Nombres} {Model.Apellidos}"
+            : Model.RazonSocial)
+    </dd>
+
+    <dt class="col-sm-3">Teléfono</dt>
+    <dd class="col-sm-9">@Model.TelefonoPrincipal</dd>
+
+    <dt class="col-sm-3">Email</dt>
+    <dd class="col-sm-9">@Model.Email</dd>
+</dl>
+
+<form asp-action="Delete" method="post">
+    <input type="hidden" asp-for="IdCliente" />
+    <button type="submit" class="btn btn-danger">Eliminar</button>
+    <a asp-action="Index" class="btn btn-secondary">Cancelar</a>
+</form>1w

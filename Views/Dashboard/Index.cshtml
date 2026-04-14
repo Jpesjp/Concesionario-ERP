@@ -1,0 +1,139 @@
+@{
+    ViewData["Title"] = "Dashboard";
+}
+
+<div class="container-fluid">
+    <div class="row mb-4">
+        <div class="col-md-12">
+            <div class="p-4 rounded-4 shadow-sm border bg-white">
+                <h1 class="fw-bold mb-1">Dashboard ERP Concesionario</h1>
+                <p class="text-muted mb-0">
+                    Vista ejecutiva del sistema con indicadores clave y accesos directos a los módulos principales.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="row g-4 mb-4">
+        <div class="col-md-3">
+            <div class="card border-0 shadow-sm rounded-4 h-100">
+                <div class="card-body">
+                    <h6 class="text-muted">Clientes</h6>
+                    <h2 class="fw-bold">@ViewBag.TotalClientes</h2>
+                    <a asp-controller="Clientes" asp-action="Index" class="btn btn-outline-dark btn-sm">Ver módulo</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="card border-0 shadow-sm rounded-4 h-100">
+                <div class="card-body">
+                    <h6 class="text-muted">Proveedores</h6>
+                    <h2 class="fw-bold">@ViewBag.TotalProveedores</h2>
+                    <a asp-controller="Proveedores" asp-action="Index" class="btn btn-outline-dark btn-sm">Ver módulo</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="card border-0 shadow-sm rounded-4 h-100">
+                <div class="card-body">
+                    <h6 class="text-muted">Productos</h6>
+                    <h2 class="fw-bold">@ViewBag.TotalProductos</h2>
+                    <a asp-controller="Productos" asp-action="Index" class="btn btn-outline-dark btn-sm">Ver módulo</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="card border-0 shadow-sm rounded-4 h-100">
+                <div class="card-body">
+                    <h6 class="text-muted">Vehículos</h6>
+                    <h2 class="fw-bold">@ViewBag.TotalVehiculos</h2>
+                    <a asp-controller="Vehiculos" asp-action="Index" class="btn btn-outline-dark btn-sm">Ver módulo</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row g-4 mb-4">
+        <div class="col-md-3">
+            <div class="card border-0 shadow-sm rounded-4 h-100">
+                <div class="card-body">
+                    <h6 class="text-muted">Empleados</h6>
+                    <h2 class="fw-bold">@ViewBag.TotalEmpleados</h2>
+                    <a asp-controller="Empleados" asp-action="Index" class="btn btn-outline-primary btn-sm">Ver módulo</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="card border-0 shadow-sm rounded-4 h-100">
+                <div class="card-body">
+                    <h6 class="text-muted">Compras</h6>
+                    <h2 class="fw-bold">@ViewBag.TotalCompras</h2>
+                    <a asp-controller="Compras" asp-action="Index" class="btn btn-outline-success btn-sm">Ver módulo</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="card border-0 shadow-sm rounded-4 h-100">
+                <div class="card-body">
+                    <h6 class="text-muted">Ventas</h6>
+                    <h2 class="fw-bold">@ViewBag.TotalVentas</h2>
+                    <a asp-controller="Ventas" asp-action="Index" class="btn btn-outline-warning btn-sm">Ver módulo</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="card border-0 shadow-sm rounded-4 h-100 @(ViewBag.TotalStockCritico > 0 ? "border border-warning" : "")">
+                <div class="card-body">
+                    <h6 class="text-muted">Stock Crítico</h6>
+                    <h2 class="fw-bold @(ViewBag.TotalStockCritico > 0 ? "text-danger" : "text-success")">@ViewBag.TotalStockCritico</h2>
+                    <a asp-controller="Inventario" asp-action="StockCritico" class="btn btn-outline-danger btn-sm">Ver alerta</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row g-4">
+        <div class="col-md-6">
+            <div class="card border-0 shadow-sm rounded-4 h-100">
+                <div class="card-header bg-dark text-white rounded-top-4">
+                    Inventario
+                </div>
+                <div class="card-body">
+                    <p class="text-muted">
+                        Supervisa el estado de productos, existencias mínimas y alertas de stock crítico.
+                    </p>
+                    <div class="d-flex gap-2 flex-wrap">
+                        <a asp-controller="Inventario" asp-action="Index" class="btn btn-dark btn-sm">Inventario</a>
+                        <a asp-controller="Inventario" asp-action="StockCritico" class="btn btn-outline-danger btn-sm">Stock crítico</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="card border-0 shadow-sm rounded-4 h-100">
+                <div class="card-header bg-secondary text-white rounded-top-4">
+                    Accesos rápidos
+                </div>
+                <div class="card-body">
+                    <p class="text-muted">
+                        Crea registros rápidamente desde el panel principal.
+                    </p>
+                    <div class="d-flex gap-2 flex-wrap">
+                        <a asp-controller="Clientes" asp-action="Create" class="btn btn-secondary btn-sm">Nuevo Cliente</a>
+                        <a asp-controller="Proveedores" asp-action="Create" class="btn btn-secondary btn-sm">Nuevo Proveedor</a>
+                        <a asp-controller="Productos" asp-action="Create" class="btn btn-secondary btn-sm">Nuevo Producto</a>
+                        <a asp-controller="Vehiculos" asp-action="Create" class="btn btn-secondary btn-sm">Nuevo Vehículo</a>
+                        <a asp-controller="Empleados" asp-action="Create" class="btn btn-secondary btn-sm">Nuevo Empleado</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

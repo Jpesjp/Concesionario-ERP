@@ -1,0 +1,69 @@
+@model IEnumerable<ERPConcesionario.Models.StockCriticoViewModel>
+
+@{
+    ViewData["Title"] = "Stock Crítico";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <div>
+        <h1 class="mb-1">Alerta de Stock Crítico</h1>
+        <p class="text-muted mb-0">Productos cuyo stock actual está por debajo o igual al mínimo permitido.</p>
+    </div>
+    <div>
+        <a asp-controller="Dashboard" asp-action="Index" class="btn btn-dark">Dashboard</a>
+        <a asp-controller="Inventario" asp-action="Index" class="btn btn-secondary">Volver</a>
+    </div>
+</div>
+
+@if (!Model.Any())
+{
+    <div class="alert alert-success shadow-sm">
+        No hay productos en estado crítico. El inventario está en condiciones normales.
+    </div>
+}
+else
+{
+    <div class="alert alert-warning shadow-sm">
+        Se encontraron <strong>@Model.Count()</strong> registros en stock crítico.
+    </div>
+
+    <div class="card shadow-sm border-0 rounded-4">
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered table-hover align-middle">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>Código</th>
+                            <th>Producto</th>
+                            <th>Stock Actual</th>
+                            <th>Stock Mínimo</th>
+                            <th>Almacén</th>
+                            <th>Ubicación</th>
+                            <th>Precio Venta</th>
+                            <th>Estado</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr class="@(item.StockActual == 0 ? "table-danger" : "table-warning")">
+                                <td>@item.CodigoProducto</td>
+                                <td>@item.NombreProducto</td>
+                                <td>@item.StockActual</td>
+                                <td>@item.StockMinimo</td>
+                                <td>@item.Almacen</td>
+                                <td>@item.Ubicacion</td>
+                                <td>@item.PrecioVenta.ToString("N0")</td>
+                                <td>
+                                    <span class="badge @(item.StockActual == 0 ? "bg-danger" : "bg-warning text-dark")">
+                                        @item.EstadoAlerta
+                                    </span>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+}

@@ -1,0 +1,34 @@
+@model ERPConcesionario.Models.VehiculoInventario
+
+@{
+    ViewData["Title"] = "Eliminar Vehículo";
+}
+
+<h1>Eliminar Vehículo</h1>
+
+<div class="alert alert-warning">
+    ¿Estás seguro de que deseas eliminar esta unidad?
+</div>
+
+<dl class="row">
+    <dt class="col-sm-3">VIN</dt>
+    <dd class="col-sm-9">@Model.VIN</dd>
+
+    <dt class="col-sm-3">Placa</dt>
+    <dd class="col-sm-9">@Model.Placa</dd>
+
+    <dt class="col-sm-3">Año Modelo</dt>
+    <dd class="col-sm-9">@Model.AnioModelo</dd>
+
+    <dt class="col-sm-3">Precio Lista</dt>
+    <dd class="col-sm-9">@Model.PrecioLista</dd>
+
+    <dt class="col-sm-3">Estado</dt>
+    <dd class="col-sm-9">@Model.EstadoUnidad</dd>
+</dl>
+
+<form asp-action="Delete" method="post">
+    <input type="hidden" asp-for="IdUnidadVehiculo" />
+    <button type="submit" class="btn btn-danger">Eliminar</button>
+    <a asp-action="Index" class="btn btn-secondary">Cancelar</a>
+</form>

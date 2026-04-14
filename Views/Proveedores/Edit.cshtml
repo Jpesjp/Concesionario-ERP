@@ -1,0 +1,126 @@
+@model ERPConcesionario.Models.Proveedor
+
+@{
+    ViewData["Title"] = "Editar Proveedor";
+}
+
+<h1>Editar Proveedor</h1>
+
+<form asp-action="Edit" method="post">
+    <input type="hidden" asp-for="IdProveedor" />
+
+    <div class="row">
+        <div class="col-md-4 mb-3">
+            <label asp-for="CodigoProveedor" class="form-label"></label>
+            <input asp-for="CodigoProveedor" class="form-control" />
+        </div>
+
+        <div class="col-md-4 mb-3">
+            <label asp-for="TipoProveedor" class="form-label"></label>
+            <select asp-for="TipoProveedor" class="form-control">
+                <option value="VEHICULOS">Vehículos</option>
+                <option value="REPUESTOS">Repuestos</option>
+                <option value="SERVICIOS">Servicios</option>
+                <option value="MIXTO">Mixto</option>
+            </select>
+        </div>
+
+        <div class="col-md-4 mb-3">
+            <label asp-for="TipoDocumento" class="form-label"></label>
+            <select asp-for="TipoDocumento" class="form-control">
+                <option value="NIT">NIT</option>
+                <option value="CC">CC</option>
+                <option value="CE">CE</option>
+                <option value="PASAPORTE">Pasaporte</option>
+            </select>
+        </div>
+
+        <div class="col-md-4 mb-3">
+            <label asp-for="NumeroDocumento" class="form-label"></label>
+            <input asp-for="NumeroDocumento" class="form-control" />
+        </div>
+
+        <div class="col-md-8 mb-3">
+            <label asp-for="RazonSocial" class="form-label"></label>
+            <input asp-for="RazonSocial" class="form-control" />
+        </div>
+
+        <div class="col-md-6 mb-3">
+            <label asp-for="NombreComercial" class="form-label"></label>
+            <input asp-for="NombreComercial" class="form-control" />
+        </div>
+
+        <div class="col-md-6 mb-3">
+            <label asp-for="NombreContacto" class="form-label"></label>
+            <input asp-for="NombreContacto" class="form-control" />
+        </div>
+
+        <div class="col-md-4 mb-3">
+            <label asp-for="Telefono" class="form-label"></label>
+            <input asp-for="Telefono" class="form-control" />
+        </div>
+
+        <div class="col-md-4 mb-3">
+            <label asp-for="Telefono2" class="form-label"></label>
+            <input asp-for="Telefono2" class="form-control" />
+        </div>
+
+        <div class="col-md-4 mb-3">
+            <label asp-for="Email" class="form-label"></label>
+            <input asp-for="Email" class="form-control" />
+        </div>
+
+        <div class="col-md-4 mb-3">
+            <label asp-for="Direccion" class="form-label"></label>
+            <input asp-for="Direccion" class="form-control" />
+        </div>
+
+        <div class="col-md-4 mb-3">
+            <label asp-for="Ciudad" class="form-label"></label>
+            <input asp-for="Ciudad" class="form-control" />
+        </div>
+
+        <div class="col-md-4 mb-3">
+            <label asp-for="Departamento" class="form-label"></label>
+            <input asp-for="Departamento" class="form-control" />
+        </div>
+
+        <div class="col-md-4 mb-3">
+            <label asp-for="Pais" class="form-label"></label>
+            <input asp-for="Pais" class="form-control" />
+        </div>
+
+        <div class="col-md-4 mb-3">
+            <label asp-for="CondicionPago" class="form-label"></label>
+            <select asp-for="CondicionPago" class="form-control">
+                <option value="CONTADO">CONTADO</option>
+                <option value="CREDITO_15">CREDITO_15</option>
+                <option value="CREDITO_30">CREDITO_30</option>
+                <option value="CREDITO_45">CREDITO_45</option>
+                <option value="CREDITO_60">CREDITO_60</option>
+            </select>
+        </div>
+
+        <div class="col-md-4 mb-3">
+            <label asp-for="CupoCredito" class="form-label"></label>
+            <input asp-for="CupoCredito" class="form-control" />
+        </div>
+
+        <div class="col-md-4 mb-3">
+            <label asp-for="EstadoProveedor" class="form-label"></label>
+            <select asp-for="EstadoProveedor" class="form-control">
+                <option value="ACTIVO">ACTIVO</option>
+                <option value="INACTIVO">INACTIVO</option>
+                <option value="BLOQUEADO">BLOQUEADO</option>
+            </select>
+        </div>
+
+        <div class="col-md-12 mb-3">
+            <label asp-for="Observaciones" class="form-label"></label>
+            <textarea asp-for="Observaciones" class="form-control"></textarea>
+        </div>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Actualizar</button>
+    <a asp-action="Index" class="btn btn-secondary">Volver</a>
+</form>

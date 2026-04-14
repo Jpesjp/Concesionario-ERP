@@ -1,0 +1,253 @@
+@model ERPConcesionario.Models.Empleado
+
+@{
+    ViewData["Title"] = "Editar Empleado";
+}
+
+<h1>Editar Empleado</h1>
+
+<form asp-action="Edit" method="post">
+    <input type="hidden" asp-for="IdEmpleado" />
+
+    <div class="row">
+        <div class="col-md-3 mb-3">
+            <label asp-for="CodigoEmpleado" class="form-label"></label>
+            <input asp-for="CodigoEmpleado" class="form-control" />
+        </div>
+        <div class="col-md-3 mb-3">
+            <label asp-for="IdSucursal" class="form-label"></label>
+            <select asp-for="IdSucursal" asp-items="ViewBag.Sucursales" class="form-control">
+                <option value="">Seleccione una sucursal</option>
+            </select>
+        </div>
+        <div class="col-md-3 mb-3">
+            <label asp-for="IdCargo" class="form-label"></label>
+            <select asp-for="IdCargo" asp-items="ViewBag.Cargos" class="form-control">
+                <option value="">Seleccione un cargo</option>
+            </select>
+        </div>
+        <div class="col-md-3 mb-3">
+            <label asp-for="TipoDocumento" class="form-label"></label>
+            <select asp-for="TipoDocumento" class="form-control">
+                <option value="CC">CC</option>
+                <option value="CE">CE</option>
+                <option value="PASAPORTE">PASAPORTE</option>
+                <option value="TI">TI</option>
+            </select>
+        </div>
+
+        <div class="col-md-3 mb-3">
+            <label asp-for="PrimerNombre" class="form-label"></label>
+            <input asp-for="PrimerNombre" class="form-control" />
+        </div>
+        <div class="col-md-3 mb-3">
+            <label asp-for="SegundoNombre" class="form-label"></label>
+            <input asp-for="SegundoNombre" class="form-control" />
+        </div>
+        <div class="col-md-3 mb-3">
+            <label asp-for="PrimerApellido" class="form-label"></label>
+            <input asp-for="PrimerApellido" class="form-control" />
+        </div>
+        <div class="col-md-3 mb-3">
+            <label asp-for="SegundoApellido" class="form-label"></label>
+            <input asp-for="SegundoApellido" class="form-control" />
+        </div>
+
+        <div class="col-md-3 mb-3">
+            <label asp-for="NumeroDocumento" class="form-label"></label>
+            <input asp-for="NumeroDocumento" class="form-control" />
+        </div>
+        <div class="col-md-3 mb-3">
+            <label asp-for="FechaNacimiento" class="form-label"></label>
+            <input asp-for="FechaNacimiento" type="date" class="form-control" />
+        </div>
+        <div class="col-md-3 mb-3">
+            <label asp-for="Sexo" class="form-label"></label>
+            <select asp-for="Sexo" class="form-control">
+                <option value="MASCULINO">MASCULINO</option>
+                <option value="FEMENINO">FEMENINO</option>
+                <option value="OTRO">OTRO</option>
+                <option value="NO_ESPECIFICA">NO_ESPECIFICA</option>
+            </select>
+        </div>
+        <div class="col-md-3 mb-3">
+            <label asp-for="EstadoCivil" class="form-label"></label>
+            <select asp-for="EstadoCivil" class="form-control">
+                <option value="SOLTERO">SOLTERO</option>
+                <option value="CASADO">CASADO</option>
+                <option value="UNION_LIBRE">UNION_LIBRE</option>
+                <option value="DIVORCIADO">DIVORCIADO</option>
+                <option value="VIUDO">VIUDO</option>
+            </select>
+        </div>
+
+        <div class="col-md-4 mb-3">
+            <label asp-for="Nacionalidad" class="form-label"></label>
+            <input asp-for="Nacionalidad" class="form-control" />
+        </div>
+        <div class="col-md-4 mb-3">
+            <label asp-for="Direccion" class="form-label"></label>
+            <input asp-for="Direccion" class="form-control" />
+        </div>
+        <div class="col-md-4 mb-3">
+            <label asp-for="Ciudad" class="form-label"></label>
+            <input asp-for="Ciudad" class="form-control" />
+        </div>
+
+        <div class="col-md-4 mb-3">
+            <label asp-for="Departamento" class="form-label"></label>
+            <input asp-for="Departamento" class="form-control" />
+        </div>
+        <div class="col-md-4 mb-3">
+            <label asp-for="Pais" class="form-label"></label>
+            <input asp-for="Pais" class="form-control" />
+        </div>
+        <div class="col-md-4 mb-3">
+            <label asp-for="TelefonoPersonal" class="form-label"></label>
+            <input asp-for="TelefonoPersonal" class="form-control" />
+        </div>
+
+        <div class="col-md-4 mb-3">
+            <label asp-for="TelefonoSecundario" class="form-label"></label>
+            <input asp-for="TelefonoSecundario" class="form-control" />
+        </div>
+        <div class="col-md-4 mb-3">
+            <label asp-for="EmailPersonal" class="form-label"></label>
+            <input asp-for="EmailPersonal" class="form-control" />
+        </div>
+        <div class="col-md-4 mb-3">
+            <label asp-for="EmailCorporativo" class="form-label"></label>
+            <input asp-for="EmailCorporativo" class="form-control" />
+        </div>
+
+        <div class="col-md-4 mb-3">
+            <label asp-for="NombreContactoEmergencia" class="form-label"></label>
+            <input asp-for="NombreContactoEmergencia" class="form-control" />
+        </div>
+        <div class="col-md-4 mb-3">
+            <label asp-for="ParentescoContactoEmergencia" class="form-label"></label>
+            <input asp-for="ParentescoContactoEmergencia" class="form-control" />
+        </div>
+        <div class="col-md-4 mb-3">
+            <label asp-for="TelefonoEmergencia" class="form-label"></label>
+            <input asp-for="TelefonoEmergencia" class="form-control" />
+        </div>
+
+        <div class="col-md-3 mb-3">
+            <label asp-for="FechaIngreso" class="form-label"></label>
+            <input asp-for="FechaIngreso" type="date" class="form-control" />
+        </div>
+        <div class="col-md-3 mb-3">
+            <label asp-for="FechaSalida" class="form-label"></label>
+            <input asp-for="FechaSalida" type="date" class="form-control" />
+        </div>
+        <div class="col-md-3 mb-3">
+            <label asp-for="TipoContrato" class="form-label"></label>
+            <select asp-for="TipoContrato" class="form-control">
+                <option value="INDEFINIDO">INDEFINIDO</option>
+                <option value="FIJO">FIJO</option>
+                <option value="OBRA_LABOR">OBRA_LABOR</option>
+                <option value="PRACTICAS">PRACTICAS</option>
+                <option value="TEMPORAL">TEMPORAL</option>
+            </select>
+        </div>
+        <div class="col-md-3 mb-3">
+            <label asp-for="SalarioBase" class="form-label"></label>
+            <input asp-for="SalarioBase" class="form-control" />
+        </div>
+
+        <div class="col-md-3 mb-3">
+            <label asp-for="AuxilioTransporte" class="form-label"></label>
+            <input asp-for="AuxilioTransporte" class="form-control" />
+        </div>
+        <div class="col-md-3 mb-3">
+            <label asp-for="ComisionBase" class="form-label"></label>
+            <input asp-for="ComisionBase" class="form-control" />
+        </div>
+        <div class="col-md-3 mb-3">
+            <label asp-for="Banco" class="form-label"></label>
+            <input asp-for="Banco" class="form-control" />
+        </div>
+        <div class="col-md-3 mb-3">
+            <label asp-for="TipoCuentaBancaria" class="form-label"></label>
+            <select asp-for="TipoCuentaBancaria" class="form-control">
+                <option value="">Seleccione</option>
+                <option value="AHORROS">AHORROS</option>
+                <option value="CORRIENTE">CORRIENTE</option>
+            </select>
+        </div>
+
+        <div class="col-md-4 mb-3">
+            <label asp-for="NumeroCuentaBancaria" class="form-label"></label>
+            <input asp-for="NumeroCuentaBancaria" class="form-control" />
+        </div>
+        <div class="col-md-4 mb-3">
+            <label asp-for="EPS" class="form-label"></label>
+            <input asp-for="EPS" class="form-control" />
+        </div>
+        <div class="col-md-4 mb-3">
+            <label asp-for="AFP" class="form-label"></label>
+            <input asp-for="AFP" class="form-control" />
+        </div>
+
+        <div class="col-md-4 mb-3">
+            <label asp-for="ARL" class="form-label"></label>
+            <input asp-for="ARL" class="form-control" />
+        </div>
+        <div class="col-md-4 mb-3">
+            <label asp-for="CajaCompensacion" class="form-label"></label>
+            <input asp-for="CajaCompensacion" class="form-control" />
+        </div>
+        <div class="col-md-4 mb-3 d-flex align-items-center">
+            <div class="form-check mt-4">
+                <input asp-for="TieneLicenciaConducir" class="form-check-input" />
+                <label asp-for="TieneLicenciaConducir" class="form-check-label"></label>
+            </div>
+        </div>
+
+        <div class="col-md-4 mb-3">
+            <label asp-for="CategoriaLicencia" class="form-label"></label>
+            <input asp-for="CategoriaLicencia" class="form-control" />
+        </div>
+        <div class="col-md-4 mb-3">
+            <label asp-for="FechaVencimientoLicencia" class="form-label"></label>
+            <input asp-for="FechaVencimientoLicencia" type="date" class="form-control" />
+        </div>
+        <div class="col-md-4 mb-3">
+            <label asp-for="TallaCamisa" class="form-label"></label>
+            <input asp-for="TallaCamisa" class="form-control" />
+        </div>
+
+        <div class="col-md-4 mb-3">
+            <label asp-for="TallaPantalon" class="form-label"></label>
+            <input asp-for="TallaPantalon" class="form-control" />
+        </div>
+        <div class="col-md-4 mb-3">
+            <label asp-for="TallaCalzado" class="form-label"></label>
+            <input asp-for="TallaCalzado" class="form-control" />
+        </div>
+        <div class="col-md-4 mb-3">
+            <label asp-for="EstadoEmpleado" class="form-label"></label>
+            <select asp-for="EstadoEmpleado" class="form-control">
+                <option value="ACTIVO">ACTIVO</option>
+                <option value="INACTIVO">INACTIVO</option>
+                <option value="SUSPENDIDO">SUSPENDIDO</option>
+                <option value="RETIRADO">RETIRADO</option>
+                <option value="VACACIONES">VACACIONES</option>
+                <option value="LICENCIA">LICENCIA</option>
+            </select>
+        </div>
+
+        <div class="col-md-6 mb-3">
+            <label asp-for="FotoUrl" class="form-label"></label>
+            <input asp-for="FotoUrl" class="form-control" />
+        </div>
+        <div class="col-md-12 mb-3">
+            <label asp-for="Observaciones" class="form-label"></label>
+            <textarea asp-for="Observaciones" class="form-control"></textarea>
+        </div>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Actualizar</button>
+    <a asp-action="Index" class="btn btn-secondary">Volver</a>
+</form>

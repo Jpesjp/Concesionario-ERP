@@ -1,0 +1,45 @@
+@model IEnumerable<ERPConcesionario.Models.Proveedor>
+
+@{
+    ViewData["Title"] = "Proveedores";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <h1>Proveedores</h1>
+    <a asp-action="Create" class="btn btn-primary">Nuevo Proveedor</a>
+</div>
+
+<table class="table table-bordered table-striped table-hover">
+    <thead class="table-dark">
+        <tr>
+            <th>Código</th>
+            <th>Tipo</th>
+            <th>Documento</th>
+            <th>Razón Social</th>
+            <th>Contacto</th>
+            <th>Teléfono</th>
+            <th>Condición Pago</th>
+            <th>Estado</th>
+            <th style="width: 180px;">Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.CodigoProveedor</td>
+                <td>@item.TipoProveedor</td>
+                <td>@item.TipoDocumento - @item.NumeroDocumento</td>
+                <td>@item.RazonSocial</td>
+                <td>@item.NombreContacto</td>
+                <td>@item.Telefono</td>
+                <td>@item.CondicionPago</td>
+                <td>@item.EstadoProveedor</td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.IdProveedor" class="btn btn-warning btn-sm">Editar</a>
+                    <a asp-action="Delete" asp-route-id="@item.IdProveedor" class="btn btn-danger btn-sm">Eliminar</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -1,0 +1,43 @@
+@model IEnumerable<ERPConcesionario.Models.VehiculoInventario>
+
+@{
+    ViewData["Title"] = "Vehículos";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <h1>Vehículos</h1>
+    <a asp-action="Create" class="btn btn-primary">Nuevo Vehículo</a>
+</div>
+
+<table class="table table-bordered table-striped table-hover">
+    <thead class="table-dark">
+        <tr>
+            <th>VIN</th>
+            <th>Placa</th>
+            <th>Año Modelo</th>
+            <th>Condición</th>
+            <th>Kilometraje</th>
+            <th>Precio Lista</th>
+            <th>Estado</th>
+            <th style="width: 180px;">Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.VIN</td>
+                <td>@item.Placa</td>
+                <td>@item.AnioModelo</td>
+                <td>@item.CondicionVehiculo</td>
+                <td>@item.Kilometraje</td>
+                <td>@item.PrecioLista</td>
+                <td>@item.EstadoUnidad</td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.IdUnidadVehiculo" class="btn btn-warning btn-sm">Editar</a>
+                    <a asp-action="Delete" asp-route-id="@item.IdUnidadVehiculo" class="btn btn-danger btn-sm">Eliminar</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
