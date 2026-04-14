@@ -1,0 +1,26 @@
+@{
+    ViewData["Title"] = "Generar Nómina";
+}
+
+<h1>Generar Nómina</h1>
+
+<div class="card shadow-sm border-0 rounded-4">
+    <div class="card-body">
+        <form asp-action="Create" method="post">
+            <div asp-validation-summary="All" class="text-danger mb-3"></div>
+
+            <div class="mb-3">
+                <label class="form-label">Período</label>
+                <input name="periodo" class="form-control" placeholder="Ejemplo: 2026-04" />
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Observaciones</label>
+                <textarea name="observaciones" class="form-control"></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-success">Generar</button>
+            <a asp-action="Index" class="btn btn-secondary">Volver</a>
+        </form>
+    </div>
+</div>

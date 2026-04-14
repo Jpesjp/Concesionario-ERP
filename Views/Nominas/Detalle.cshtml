@@ -1,0 +1,90 @@
+@model IEnumerable<ERPConcesionario.Models.NominaDetalleViewModel>
+
+@{
+    ViewData["Title"] = "Detalle de Nómina";
+    decimal totalNeto = Model.Sum(x => x.NetoPagar);
+    decimal totalDeducciones = Model.Sum(x => x.Deducciones);
+    decimal totalParafiscales = Model.Sum(x => x.ParafiscalesEmpresa);
+}
+
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <div>
+        <h1 class="mb-1">Detalle de Nómina</h1>
+        <p class="text-muted mb-0">Detalle de liquidación por empleado.</p>
+    </div>
+    <div>
+        <a asp-action="Index" class="btn btn-secondary">Volver</a>
+        <a asp-action="Cerrar" asp-route-id="@ViewBag.IdNomina" class="btn btn-dark">Cerrar Nómina</a>
+    </div>
+</div>
+
+<div class="row g-3 mb-4">
+    <div class="col-md-4">
+        <div class="card border-0 shadow-sm rounded-4">
+            <div class="card-body">
+                <h6 class="text-muted">Total Neto a Pagar</h6>
+                <h3 class="fw-bold">@totalNeto.ToString("N0")</h3>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="card border-0 shadow-sm rounded-4">
+            <div class="card-body">
+                <h6 class="text-muted">Total Deducciones</h6>
+                <h3 class="fw-bold">@totalDeducciones.ToString("N0")</h3>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="card border-0 shadow-sm rounded-4">
+            <div class="card-body">
+                <h6 class="text-muted">Parafiscales Empresa</h6>
+                <h3 class="fw-bold">@totalParafiscales.ToString("N0")</h3>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="card shadow-sm border-0 rounded-4">
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered table-hover align-middle">
+                <thead class="table-dark">
+                    <tr>
+                        <th>Código</th>
+                        <th>Empleado</th>
+                        <th>Contrato</th>
+                        <th>Salario</th>
+                        <th>Auxilio</th>
+                        <th>Comisiones</th>
+                        <th>Salud</th>
+                        <th>Pensión</th>
+                        <th>Deducciones</th>
+                        <th>Parafiscales</th>
+                        <th>Neto</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@item.CodigoEmpleado</td>
+                            <td>@item.NombreEmpleado</td>
+                            <td>@item.TipoContrato</td>
+                            <td>@item.SalarioBase.ToString("N0")</td>
+                            <td>@item.AuxilioTransporte.ToString("N0")</td>
+                            <td>@item.Comisiones.ToString("N0")</td>
+                            <td>@item.SaludEmpleado.ToString("N0")</td>
+                            <td>@item.PensionEmpleado.ToString("N0")</td>
+                            <td>@item.Deducciones.ToString("N0")</td>
+                            <td>@item.ParafiscalesEmpresa.ToString("N0")</td>
+                            <td class="fw-bold">@item.NetoPagar.ToString("N0")</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

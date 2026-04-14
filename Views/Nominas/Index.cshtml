@@ -1,0 +1,53 @@
+@model IEnumerable<dynamic>
+
+@{
+    ViewData["Title"] = "Nóminas";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <div>
+        <h1 class="mb-1">Nóminas</h1>
+        <p class="text-muted mb-0">Gestión de períodos y cálculo mensual de nómina.</p>
+    </div>
+    <div>
+        <a asp-controller="Dashboard" asp-action="Index" class="btn btn-dark">Dashboard</a>
+        <a asp-action="Create" class="btn btn-primary">Generar Nómina</a>
+    </div>
+</div>
+
+@if (!Model.Any())
+{
+    <div class="alert alert-info">No hay nóminas registradas.</div>
+}
+else
+{
+    <div class="card shadow-sm border-0 rounded-4">
+        <div class="card-body">
+            <table class="table table-bordered table-hover align-middle">
+                <thead class="table-dark">
+                    <tr>
+                        <th>Período</th>
+                        <th>Fecha Generación</th>
+                        <th>Estado</th>
+                        <th>Observaciones</th>
+                        <th style="width: 150px;">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@item.Periodo</td>
+                            <td>@item.FechaGeneracion.ToString("yyyy-MM-dd")</td>
+                            <td>@item.Estado</td>
+                            <td>@item.Observaciones</td>
+                            <td>
+                                <a asp-action="Detalle" asp-route-id="@item.IdNomina" class="btn btn-sm btn-outline-primary">Ver detalle</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+}
