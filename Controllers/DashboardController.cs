@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Data.SqlClient;
+using ERPConcesionario.Helpers;
 
 namespace ERPConcesionario.Controllers
 {
@@ -14,6 +15,12 @@ namespace ERPConcesionario.Controllers
 
         public IActionResult Index()
         {
+            var acceso = AutorizacionHelper.ValidarSesionYRol(this, "Admin", "Compras", "Ventas", "Inventario", "RRHH");
+            if (acceso != null) return acceso;
+            if (string.IsNullOrEmpty(HttpContext.Session.GetString("Username")))
+                return RedirectToAction("Login", "Account");
+
+
             ViewBag.TotalClientes = ObtenerConteo("SELECT COUNT(*) FROM Clientes");
             ViewBag.TotalProveedores = ObtenerConteo("SELECT COUNT(*) FROM Proveedores");
             ViewBag.TotalProductos = ObtenerConteo("SELECT COUNT(*) FROM Productos");

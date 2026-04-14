@@ -133,22 +133,10 @@ C:\Users\peril\Documents\ERPConcesionario\ERPConcesionario\obj\Debug\net10.0\ref
 C:\Users\peril\Documents\ERPConcesionario\ERPConcesionario\obj\Debug\net10.0\ERPConcesionario.pdb
 C:\Users\peril\Documents\ERPConcesionario\ERPConcesionario\obj\Debug\net10.0\ERPConcesionario.genruntimeconfig.cache
 C:\Users\peril\Documents\ERPConcesionario\ERPConcesionario\obj\Debug\net10.0\ref\ERPConcesionario.dll
-C:\Users\peril\Documents\Universidad\Semestre 5\Arquitectura de Software\ERPConcesionario\ERPConcesionario\obj\Debug\net10.0\ERPConcesionario.csproj.AssemblyReference.cache
-C:\Users\peril\Documents\Universidad\Semestre 5\Arquitectura de Software\ERPConcesionario\ERPConcesionario\obj\Debug\net10.0\rpswa.dswa.cache.json
-C:\Users\peril\Documents\Universidad\Semestre 5\Arquitectura de Software\ERPConcesionario\ERPConcesionario\obj\Debug\net10.0\ERPConcesionario.GeneratedMSBuildEditorConfig.editorconfig
-C:\Users\peril\Documents\Universidad\Semestre 5\Arquitectura de Software\ERPConcesionario\ERPConcesionario\obj\Debug\net10.0\ERPConcesionario.AssemblyInfoInputs.cache
-C:\Users\peril\Documents\Universidad\Semestre 5\Arquitectura de Software\ERPConcesionario\ERPConcesionario\obj\Debug\net10.0\ERPConcesionario.AssemblyInfo.cs
-C:\Users\peril\Documents\Universidad\Semestre 5\Arquitectura de Software\ERPConcesionario\ERPConcesionario\obj\Debug\net10.0\ERPConcesionario.csproj.CoreCompileInputs.cache
-C:\Users\peril\Documents\Universidad\Semestre 5\Arquitectura de Software\ERPConcesionario\ERPConcesionario\obj\Debug\net10.0\ERPConcesionario.MvcApplicationPartsAssemblyInfo.cache
-C:\Users\peril\Documents\Universidad\Semestre 5\Arquitectura de Software\ERPConcesionario\ERPConcesionario\obj\Debug\net10.0\ERPConcesionario.RazorAssemblyInfo.cache
-C:\Users\peril\Documents\Universidad\Semestre 5\Arquitectura de Software\ERPConcesionario\ERPConcesionario\obj\Debug\net10.0\ERPConcesionario.RazorAssemblyInfo.cs
-C:\Users\peril\Documents\Universidad\Semestre 5\Arquitectura de Software\ERPConcesionario\ERPConcesionario\obj\Debug\net10.0\ERPConcesionario.dll
-C:\Users\peril\Documents\Universidad\Semestre 5\Arquitectura de Software\ERPConcesionario\ERPConcesionario\obj\Debug\net10.0\refint\ERPConcesionario.dll
-C:\Users\peril\Documents\Universidad\Semestre 5\Arquitectura de Software\ERPConcesionario\ERPConcesionario\obj\Debug\net10.0\ERPConcesionario.pdb
 C:\Users\peril\Documents\Universidad\Semestre 5\Arquitectura de Software\ERPConcesionario\ERPConcesionario\bin\Debug\net10.0\appsettings.Development.json
 C:\Users\peril\Documents\Universidad\Semestre 5\Arquitectura de Software\ERPConcesionario\ERPConcesionario\bin\Debug\net10.0\appsettings.json
-C:\Users\peril\Documents\Universidad\Semestre 5\Arquitectura de Software\ERPConcesionario\ERPConcesionario\bin\Debug\net10.0\ERPConcesionario.staticwebassets.endpoints.json
 C:\Users\peril\Documents\Universidad\Semestre 5\Arquitectura de Software\ERPConcesionario\ERPConcesionario\bin\Debug\net10.0\ERPConcesionario.staticwebassets.runtime.json
+C:\Users\peril\Documents\Universidad\Semestre 5\Arquitectura de Software\ERPConcesionario\ERPConcesionario\bin\Debug\net10.0\ERPConcesionario.staticwebassets.endpoints.json
 C:\Users\peril\Documents\Universidad\Semestre 5\Arquitectura de Software\ERPConcesionario\ERPConcesionario\bin\Debug\net10.0\ERPConcesionario.exe
 C:\Users\peril\Documents\Universidad\Semestre 5\Arquitectura de Software\ERPConcesionario\ERPConcesionario\bin\Debug\net10.0\ERPConcesionario.deps.json
 C:\Users\peril\Documents\Universidad\Semestre 5\Arquitectura de Software\ERPConcesionario\ERPConcesionario\bin\Debug\net10.0\ERPConcesionario.runtimeconfig.json
@@ -190,6 +178,16 @@ C:\Users\peril\Documents\Universidad\Semestre 5\Arquitectura de Software\ERPConc
 C:\Users\peril\Documents\Universidad\Semestre 5\Arquitectura de Software\ERPConcesionario\ERPConcesionario\bin\Debug\net10.0\runtimes\win-arm64\native\Microsoft.Data.SqlClient.SNI.dll
 C:\Users\peril\Documents\Universidad\Semestre 5\Arquitectura de Software\ERPConcesionario\ERPConcesionario\bin\Debug\net10.0\runtimes\win-x64\native\Microsoft.Data.SqlClient.SNI.dll
 C:\Users\peril\Documents\Universidad\Semestre 5\Arquitectura de Software\ERPConcesionario\ERPConcesionario\bin\Debug\net10.0\runtimes\win-x86\native\Microsoft.Data.SqlClient.SNI.dll
+C:\Users\peril\Documents\Universidad\Semestre 5\Arquitectura de Software\ERPConcesionario\ERPConcesionario\obj\Debug\net10.0\ERPConcesionario.csproj.AssemblyReference.cache
+C:\Users\peril\Documents\Universidad\Semestre 5\Arquitectura de Software\ERPConcesionario\ERPConcesionario\obj\Debug\net10.0\rpswa.dswa.cache.json
+C:\Users\peril\Documents\Universidad\Semestre 5\Arquitectura de Software\ERPConcesionario\ERPConcesionario\obj\Debug\net10.0\ERPConcesionario.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\peril\Documents\Universidad\Semestre 5\Arquitectura de Software\ERPConcesionario\ERPConcesionario\obj\Debug\net10.0\ERPConcesionario.AssemblyInfoInputs.cache
+C:\Users\peril\Documents\Universidad\Semestre 5\Arquitectura de Software\ERPConcesionario\ERPConcesionario\obj\Debug\net10.0\ERPConcesionario.AssemblyInfo.cs
+C:\Users\peril\Documents\Universidad\Semestre 5\Arquitectura de Software\ERPConcesionario\ERPConcesionario\obj\Debug\net10.0\ERPConcesionario.csproj.CoreCompileInputs.cache
+C:\Users\peril\Documents\Universidad\Semestre 5\Arquitectura de Software\ERPConcesionario\ERPConcesionario\obj\Debug\net10.0\ERPConcesionario.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\peril\Documents\Universidad\Semestre 5\Arquitectura de Software\ERPConcesionario\ERPConcesionario\obj\Debug\net10.0\ERPConcesionario.RazorAssemblyInfo.cache
+C:\Users\peril\Documents\Universidad\Semestre 5\Arquitectura de Software\ERPConcesionario\ERPConcesionario\obj\Debug\net10.0\ERPConcesionario.RazorAssemblyInfo.cs
+C:\Users\peril\Documents\Universidad\Semestre 5\Arquitectura de Software\ERPConcesionario\ERPConcesionario\obj\Debug\net10.0\ERPConcesionario.sourcelink.json
 C:\Users\peril\Documents\Universidad\Semestre 5\Arquitectura de Software\ERPConcesionario\ERPConcesionario\obj\Debug\net10.0\rjimswa.dswa.cache.json
 C:\Users\peril\Documents\Universidad\Semestre 5\Arquitectura de Software\ERPConcesionario\ERPConcesionario\obj\Debug\net10.0\rjsmrazor.dswa.cache.json
 C:\Users\peril\Documents\Universidad\Semestre 5\Arquitectura de Software\ERPConcesionario\ERPConcesionario\obj\Debug\net10.0\rjsmcshtml.dswa.cache.json
@@ -266,6 +264,8 @@ C:\Users\peril\Documents\Universidad\Semestre 5\Arquitectura de Software\ERPConc
 C:\Users\peril\Documents\Universidad\Semestre 5\Arquitectura de Software\ERPConcesionario\ERPConcesionario\obj\Debug\net10.0\staticwebassets.build.endpoints.json
 C:\Users\peril\Documents\Universidad\Semestre 5\Arquitectura de Software\ERPConcesionario\ERPConcesionario\obj\Debug\net10.0\swae.build.ex.cache
 C:\Users\peril\Documents\Universidad\Semestre 5\Arquitectura de Software\ERPConcesionario\ERPConcesionario\obj\Debug\net10.0\ERPConce.479DEC36.Up2Date
+C:\Users\peril\Documents\Universidad\Semestre 5\Arquitectura de Software\ERPConcesionario\ERPConcesionario\obj\Debug\net10.0\ERPConcesionario.dll
+C:\Users\peril\Documents\Universidad\Semestre 5\Arquitectura de Software\ERPConcesionario\ERPConcesionario\obj\Debug\net10.0\refint\ERPConcesionario.dll
+C:\Users\peril\Documents\Universidad\Semestre 5\Arquitectura de Software\ERPConcesionario\ERPConcesionario\obj\Debug\net10.0\ERPConcesionario.pdb
 C:\Users\peril\Documents\Universidad\Semestre 5\Arquitectura de Software\ERPConcesionario\ERPConcesionario\obj\Debug\net10.0\ERPConcesionario.genruntimeconfig.cache
 C:\Users\peril\Documents\Universidad\Semestre 5\Arquitectura de Software\ERPConcesionario\ERPConcesionario\obj\Debug\net10.0\ref\ERPConcesionario.dll
-C:\Users\peril\Documents\Universidad\Semestre 5\Arquitectura de Software\ERPConcesionario\ERPConcesionario\obj\Debug\net10.0\ERPConcesionario.sourcelink.json

@@ -2,6 +2,8 @@ using ERPConcesionario.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Data.SqlClient;
+using ERPConcesionario.Helpers;
+
 
 namespace ERPConcesionario.Controllers
 {
@@ -16,6 +18,8 @@ namespace ERPConcesionario.Controllers
 
         public IActionResult Index()
         {
+            var acceso = AutorizacionHelper.ValidarSesionYRol(this, "Admin", "RRHH");
+            if (acceso != null) return acceso;
             var empleados = new List<Empleado>();
 
             string query = @"SELECT * FROM Empleados";
@@ -38,6 +42,8 @@ namespace ERPConcesionario.Controllers
 
         public IActionResult Create()
         {
+            var acceso = AutorizacionHelper.ValidarSesionYRol(this, "Admin", "RRHH");
+            if (acceso != null) return acceso;
             CargarCombos();
             return View();
         }
@@ -45,6 +51,8 @@ namespace ERPConcesionario.Controllers
         [HttpPost]
         public IActionResult Create(Empleado empleado)
         {
+            var acceso = AutorizacionHelper.ValidarSesionYRol(this, "Admin", "RRHH");
+            if (acceso != null) return acceso;
             if (!ModelState.IsValid)
             {
                 CargarCombos();
@@ -84,6 +92,8 @@ namespace ERPConcesionario.Controllers
 
         public IActionResult Edit(int id)
         {
+            var acceso = AutorizacionHelper.ValidarSesionYRol(this, "Admin", "RRHH");
+            if (acceso != null) return acceso;
             Empleado? empleado = null;
 
             string query = @"SELECT * FROM Empleados WHERE IdEmpleado = @IdEmpleado";
@@ -113,6 +123,8 @@ namespace ERPConcesionario.Controllers
         [HttpPost]
         public IActionResult Edit(Empleado empleado)
         {
+            var acceso = AutorizacionHelper.ValidarSesionYRol(this, "Admin", "RRHH");
+            if (acceso != null) return acceso;
             if (!ModelState.IsValid)
             {
                 CargarCombos();
@@ -182,6 +194,8 @@ namespace ERPConcesionario.Controllers
 
         public IActionResult Delete(int id)
         {
+            var acceso = AutorizacionHelper.ValidarSesionYRol(this, "Admin", "RRHH");
+            if (acceso != null) return acceso;
             Empleado? empleado = null;
 
             string query = @"SELECT * FROM Empleados WHERE IdEmpleado = @IdEmpleado";
@@ -219,6 +233,8 @@ namespace ERPConcesionario.Controllers
         [HttpPost, ActionName("Delete")]
         public IActionResult DeleteConfirmed(int id)
         {
+            var acceso = AutorizacionHelper.ValidarSesionYRol(this, "Admin", "RRHH");
+            if (acceso != null) return acceso;
             string query = @"DELETE FROM Empleados WHERE IdEmpleado = @IdEmpleado";
 
             using (SqlCommand cmd = new SqlCommand(query, _connection))

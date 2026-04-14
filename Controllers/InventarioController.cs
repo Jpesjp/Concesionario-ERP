@@ -1,6 +1,7 @@
 using ERPConcesionario.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Data.SqlClient;
+using ERPConcesionario.Helpers;
 
 namespace ERPConcesionario.Controllers
 {
@@ -15,11 +16,15 @@ namespace ERPConcesionario.Controllers
 
         public IActionResult Index()
         {
+            var acceso = AutorizacionHelper.ValidarSesionYRol(this, "Admin", "Inventario");
+            if (acceso != null) return acceso;
             return View();
         }
 
         public IActionResult StockCritico()
         {
+            var acceso = AutorizacionHelper.ValidarSesionYRol(this, "Admin", "Inventario");
+            if (acceso != null) return acceso;
             var lista = new List<StockCriticoViewModel>();
 
             string query = @"

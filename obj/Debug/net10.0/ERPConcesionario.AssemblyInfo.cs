@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("ERPConcesionario")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+9ccc8ab37fcc4f4c13f344ec15aec1c4ae84a6ff")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+702a1ce7f21725e7a9d6ee6f0bfc65a5afeb9748")]
 [assembly: System.Reflection.AssemblyProductAttribute("ERPConcesionario")]
 [assembly: System.Reflection.AssemblyTitleAttribute("ERPConcesionario")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

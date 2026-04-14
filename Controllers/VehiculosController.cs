@@ -2,6 +2,7 @@ using ERPConcesionario.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Data.SqlClient;
+using ERPConcesionario.Helpers;
 
 namespace ERPConcesionario.Controllers
 {
@@ -16,6 +17,8 @@ namespace ERPConcesionario.Controllers
 
         public IActionResult Index()
         {
+            var acceso = AutorizacionHelper.ValidarSesionYRol(this, "Admin", "Inventario");
+            if (acceso != null) return acceso;
             var vehiculos = new List<VehiculoInventario>();
 
             string query = @"SELECT IdUnidadVehiculo, IdVersionVehiculo, IdColor, IdAlmacen, IdUbicacion,
@@ -67,6 +70,8 @@ namespace ERPConcesionario.Controllers
 
         public IActionResult Create()
         {
+            var acceso = AutorizacionHelper.ValidarSesionYRol(this, "Admin", "Inventario");
+            if (acceso != null) return acceso;
             CargarCombos();
             return View();
         }
@@ -74,6 +79,8 @@ namespace ERPConcesionario.Controllers
         [HttpPost]
         public IActionResult Create(VehiculoInventario vehiculo)
         {
+            var acceso = AutorizacionHelper.ValidarSesionYRol(this, "Admin", "Inventario");
+            if (acceso != null) return acceso;
             if (!ModelState.IsValid)
             {
                 CargarCombos();
@@ -127,6 +134,8 @@ namespace ERPConcesionario.Controllers
 
         public IActionResult Edit(int id)
         {
+            var acceso = AutorizacionHelper.ValidarSesionYRol(this, "Admin", "Inventario");
+            if (acceso != null) return acceso;
             VehiculoInventario? vehiculo = null;
 
             string query = @"SELECT * FROM VehiculosInventario WHERE IdUnidadVehiculo = @IdUnidadVehiculo";
@@ -180,6 +189,8 @@ namespace ERPConcesionario.Controllers
         [HttpPost]
         public IActionResult Edit(VehiculoInventario vehiculo)
         {
+            var acceso = AutorizacionHelper.ValidarSesionYRol(this, "Admin", "Inventario");
+            if (acceso != null) return acceso;
             if (!ModelState.IsValid)
             {
                 CargarCombos();
@@ -245,6 +256,8 @@ namespace ERPConcesionario.Controllers
 
         public IActionResult Delete(int id)
         {
+            var acceso = AutorizacionHelper.ValidarSesionYRol(this, "Admin", "Inventario");
+            if (acceso != null) return acceso;
             VehiculoInventario? vehiculo = null;
 
             string query = @"SELECT * FROM VehiculosInventario WHERE IdUnidadVehiculo = @IdUnidadVehiculo";
@@ -281,6 +294,8 @@ namespace ERPConcesionario.Controllers
         [HttpPost, ActionName("Delete")]
         public IActionResult DeleteConfirmed(int id)
         {
+            var acceso = AutorizacionHelper.ValidarSesionYRol(this, "Admin", "Inventario");
+            if (acceso != null) return acceso;
             string query = @"DELETE FROM VehiculosInventario WHERE IdUnidadVehiculo = @IdUnidadVehiculo";
 
             using (SqlCommand cmd = new SqlCommand(query, _connection))

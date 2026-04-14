@@ -1,6 +1,7 @@
 using ERPConcesionario.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Data.SqlClient;
+using ERPConcesionario.Helpers;
 
 namespace ERPConcesionario.Controllers
 {
@@ -15,6 +16,8 @@ namespace ERPConcesionario.Controllers
 
         public IActionResult Index()
         {
+            var acceso = AutorizacionHelper.ValidarSesionYRol(this, "Admin", "Ventas");
+            if (acceso != null) return acceso;
             var clientes = new List<Cliente>();
 
             string query = @"SELECT IdCliente, CodigoCliente, TipoCliente, TipoDocumento, NumeroDocumento,
@@ -69,12 +72,17 @@ namespace ERPConcesionario.Controllers
 
         public IActionResult Create()
         {
+            var acceso = AutorizacionHelper.ValidarSesionYRol(this, "Admin", "Ventas");
+            if (acceso != null) return acceso;
             return View();
         }
 
         [HttpPost]
         public IActionResult Create(Cliente cliente)
         {
+            var acceso = AutorizacionHelper.ValidarSesionYRol(this, "Admin", "Ventas");
+            if (acceso != null) return acceso;
+
             if (!ModelState.IsValid)
                 return View(cliente);
 
@@ -128,6 +136,9 @@ namespace ERPConcesionario.Controllers
 
         public IActionResult Edit(int id)
         {
+            var acceso = AutorizacionHelper.ValidarSesionYRol(this, "Admin", "Ventas");
+            if (acceso != null) return acceso;
+
             Cliente? cliente = null;
 
             string query = @"SELECT * FROM Clientes WHERE IdCliente = @IdCliente";
@@ -183,6 +194,9 @@ namespace ERPConcesionario.Controllers
         [HttpPost]
         public IActionResult Edit(Cliente cliente)
         {
+            var acceso = AutorizacionHelper.ValidarSesionYRol(this, "Admin", "Ventas");
+            if (acceso != null) return acceso;
+
             if (!ModelState.IsValid)
                 return View(cliente);
 
@@ -249,6 +263,8 @@ namespace ERPConcesionario.Controllers
 
         public IActionResult Delete(int id)
         {
+            var acceso = AutorizacionHelper.ValidarSesionYRol(this, "Admin", "Ventas");
+            if (acceso != null) return acceso;
             Cliente? cliente = null;
 
             string query = @"SELECT * FROM Clientes WHERE IdCliente = @IdCliente";
@@ -290,6 +306,9 @@ namespace ERPConcesionario.Controllers
         [HttpPost, ActionName("Delete")]
         public IActionResult DeleteConfirmed(int id)
         {
+            var acceso = AutorizacionHelper.ValidarSesionYRol(this, "Admin", "Ventas");
+            if (acceso != null) return acceso;
+            
             string query = @"DELETE FROM Clientes WHERE IdCliente = @IdCliente";
 
             using (SqlCommand cmd = new SqlCommand(query, _connection))

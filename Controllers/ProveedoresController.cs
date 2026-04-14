@@ -1,6 +1,7 @@
 using ERPConcesionario.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Data.SqlClient;
+using ERPConcesionario.Helpers;
 
 namespace ERPConcesionario.Controllers
 {
@@ -15,6 +16,8 @@ namespace ERPConcesionario.Controllers
 
         public IActionResult Index()
         {
+            var acceso = AutorizacionHelper.ValidarSesionYRol(this, "Admin", "Compras");
+            if (acceso != null) return acceso;
             var proveedores = new List<Proveedor>();
 
             string query = @"SELECT IdProveedor, CodigoProveedor, TipoProveedor, TipoDocumento, NumeroDocumento,
@@ -63,12 +66,16 @@ namespace ERPConcesionario.Controllers
 
         public IActionResult Create()
         {
+            var acceso = AutorizacionHelper.ValidarSesionYRol(this, "Admin", "Compras");
+            if (acceso != null) return acceso;
             return View();
         }
 
         [HttpPost]
         public IActionResult Create(Proveedor proveedor)
         {
+            var acceso = AutorizacionHelper.ValidarSesionYRol(this, "Admin", "Compras");
+            if (acceso != null) return acceso;
             if (!ModelState.IsValid)
                 return View(proveedor);
 
@@ -115,6 +122,8 @@ namespace ERPConcesionario.Controllers
 
         public IActionResult Edit(int id)
         {
+            var acceso = AutorizacionHelper.ValidarSesionYRol(this, "Admin", "Compras");
+            if (acceso != null) return acceso;
             Proveedor? proveedor = null;
 
             string query = @"SELECT * FROM Proveedores WHERE IdProveedor = @IdProveedor";
@@ -165,6 +174,8 @@ namespace ERPConcesionario.Controllers
         [HttpPost]
         public IActionResult Edit(Proveedor proveedor)
         {
+            var acceso = AutorizacionHelper.ValidarSesionYRol(this, "Admin", "Compras");
+            if (acceso != null) return acceso;
             if (!ModelState.IsValid)
                 return View(proveedor);
 
@@ -221,6 +232,8 @@ namespace ERPConcesionario.Controllers
 
         public IActionResult Delete(int id)
         {
+            var acceso = AutorizacionHelper.ValidarSesionYRol(this, "Admin", "Compras");
+            if (acceso != null) return acceso;
             Proveedor? proveedor = null;
 
             string query = @"SELECT * FROM Proveedores WHERE IdProveedor = @IdProveedor";
@@ -257,6 +270,8 @@ namespace ERPConcesionario.Controllers
         [HttpPost, ActionName("Delete")]
         public IActionResult DeleteConfirmed(int id)
         {
+            var acceso = AutorizacionHelper.ValidarSesionYRol(this, "Admin", "Compras");
+            if (acceso != null) return acceso;
             string query = @"DELETE FROM Proveedores WHERE IdProveedor = @IdProveedor";
 
             using (SqlCommand cmd = new SqlCommand(query, _connection))

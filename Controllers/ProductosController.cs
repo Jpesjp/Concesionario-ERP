@@ -1,6 +1,7 @@
 using ERPConcesionario.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Data.SqlClient;
+using ERPConcesionario.Helpers;
 
 namespace ERPConcesionario.Controllers
 {
@@ -15,6 +16,8 @@ namespace ERPConcesionario.Controllers
 
         public IActionResult Index()
         {
+            var acceso = AutorizacionHelper.ValidarSesionYRol(this, "Admin", "Inventario");
+            if (acceso != null) return acceso;
             var productos = new List<Producto>();
 
             string query = @"SELECT IdProducto, IdCategoriaProducto, CodigoProducto, CodigoBarras, Nombre,
@@ -60,12 +63,17 @@ namespace ERPConcesionario.Controllers
 
         public IActionResult Create()
         {
+            var acceso = AutorizacionHelper.ValidarSesionYRol(this, "Admin", "Inventario");
+            if (acceso != null) return acceso;
             return View();
         }
 
         [HttpPost]
         public IActionResult Create(Producto producto)
         {
+            var acceso = AutorizacionHelper.ValidarSesionYRol(this, "Admin", "Inventario");
+            if (acceso != null) return acceso;
+
             if (!ModelState.IsValid)
                 return View(producto);
 
@@ -107,6 +115,8 @@ namespace ERPConcesionario.Controllers
 
         public IActionResult Edit(int id)
         {
+            var acceso = AutorizacionHelper.ValidarSesionYRol(this, "Admin", "Inventario");
+            if (acceso != null) return acceso;
             Producto? producto = null;
 
             string query = @"SELECT * FROM Productos WHERE IdProducto = @IdProducto";
@@ -154,6 +164,8 @@ namespace ERPConcesionario.Controllers
         [HttpPost]
         public IActionResult Edit(Producto producto)
         {
+            var acceso = AutorizacionHelper.ValidarSesionYRol(this, "Admin", "Inventario");
+            if (acceso != null) return acceso;
             if (!ModelState.IsValid)
                 return View(producto);
 
@@ -204,6 +216,8 @@ namespace ERPConcesionario.Controllers
 
         public IActionResult Delete(int id)
         {
+            var acceso = AutorizacionHelper.ValidarSesionYRol(this, "Admin", "Inventario");
+            if (acceso != null) return acceso;
             Producto? producto = null;
 
             string query = @"SELECT * FROM Productos WHERE IdProducto = @IdProducto";
@@ -240,6 +254,8 @@ namespace ERPConcesionario.Controllers
         [HttpPost, ActionName("Delete")]
         public IActionResult DeleteConfirmed(int id)
         {
+            var acceso = AutorizacionHelper.ValidarSesionYRol(this, "Admin", "Inventario");
+            if (acceso != null) return acceso;
             string query = @"DELETE FROM Productos WHERE IdProducto = @IdProducto";
 
             using (SqlCommand cmd = new SqlCommand(query, _connection))

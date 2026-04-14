@@ -1,6 +1,7 @@
 using ERPConcesionario.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Data.SqlClient;
+using ERPConcesionario.Helpers;
 
 namespace ERPConcesionario.Controllers
 {
@@ -15,6 +16,9 @@ namespace ERPConcesionario.Controllers
 
         public IActionResult Index()
         {
+            
+            var acceso = AutorizacionHelper.ValidarSesionYRol(this, "Admin", "RRHH");
+            if (acceso != null) return acceso;
             var nominas = new List<dynamic>();
 
             string query = @"
@@ -47,12 +51,18 @@ namespace ERPConcesionario.Controllers
 
         public IActionResult Create()
         {
+            var acceso = AutorizacionHelper.ValidarSesionYRol(this, "Admin", "RRHH");
+            if (acceso != null) return acceso;
+
             return View();
         }
 
         [HttpPost]
         public IActionResult Create(string periodo, string? observaciones)
         {
+            var acceso = AutorizacionHelper.ValidarSesionYRol(this, "Admin", "RRHH");
+            if (acceso != null) return acceso;
+
             if (string.IsNullOrWhiteSpace(periodo))
             {
                 ModelState.AddModelError("", "Debes indicar el período, por ejemplo 2026-04.");
@@ -73,6 +83,8 @@ namespace ERPConcesionario.Controllers
 
         public IActionResult Detalle(int id)
         {
+            var acceso = AutorizacionHelper.ValidarSesionYRol(this, "Admin", "RRHH");
+            if (acceso != null) return acceso;
             var detalle = new List<NominaDetalleViewModel>();
 
             string query = @"
@@ -146,6 +158,9 @@ namespace ERPConcesionario.Controllers
 
         public IActionResult Cerrar(int id)
         {
+            var acceso = AutorizacionHelper.ValidarSesionYRol(this, "Admin", "RRHH");
+            if (acceso != null) return acceso;
+            
             string query = "UPDATE Nominas SET Estado = 'CERRADA' WHERE IdNomina = @IdNomina";
 
             using (SqlCommand cmd = new SqlCommand(query, _connection))
