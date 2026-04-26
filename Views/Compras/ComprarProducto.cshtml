@@ -1,0 +1,97 @@
+@model ERPConcesionario.Models.CompraProductoFormViewModel
+
+@{
+    ViewData["Title"] = "Nueva Compra";
+    var productos = ViewBag.Productos as List<Microsoft.AspNetCore.Mvc.Rendering.SelectListItem> ?? new List<Microsoft.AspNetCore.Mvc.Rendering.SelectListItem>();
+    var proveedores = ViewBag.Proveedores as List<Microsoft.AspNetCore.Mvc.Rendering.SelectListItem> ?? new List<Microsoft.AspNetCore.Mvc.Rendering.SelectListItem>();
+    var almacenes = ViewBag.Almacenes as List<Microsoft.AspNetCore.Mvc.Rendering.SelectListItem> ?? new List<Microsoft.AspNetCore.Mvc.Rendering.SelectListItem>();
+    var ubicaciones = ViewBag.Ubicaciones as List<Microsoft.AspNetCore.Mvc.Rendering.SelectListItem> ?? new List<Microsoft.AspNetCore.Mvc.Rendering.SelectListItem>();
+}
+
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <div>
+        <h1 class="mb-1">Nueva Compra</h1>
+        <p class="text-muted mb-0">Compra cualquier producto activo y actualiza inventario inmediatamente.</p>
+    </div>
+    <a asp-action="Index" class="btn btn-secondary">Volver</a>
+</div>
+
+@if (!productos.Any())
+{
+    <div class="alert alert-danger">No hay productos activos que afecten inventario.</div>
+}
+
+@if (!proveedores.Any())
+{
+    <div class="alert alert-danger">No hay proveedores activos para registrar compras.</div>
+}
+
+@if (!almacenes.Any() || !ubicaciones.Any())
+{
+    <div class="alert alert-danger">Debe existir al menos un almacen y una ubicacion activa.</div>
+}
+
+<form asp-action="ComprarProducto" method="post" class="card border-0 shadow-sm">
+    <div class="card-body">
+        <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+        <div class="row g-3">
+            <div class="col-md-6">
+                <label asp-for="IdProducto" class="form-label">Producto</label>
+                <select asp-for="IdProducto" asp-items="productos" class="form-select">
+                    <option value="">Seleccione un producto</option>
+                </select>
+                <span asp-validation-for="IdProducto" class="text-danger"></span>
+            </div>
+            <div class="col-md-6">
+                <label asp-for="IdProveedor" class="form-label">Proveedor</label>
+                <select asp-for="IdProveedor" asp-items="proveedores" class="form-select">
+                    <option value="">Seleccione un proveedor</option>
+                </select>
+                <span asp-validation-for="IdProveedor" class="text-danger"></span>
+            </div>
+            <div class="col-md-6">
+                <label asp-for="IdAlmacen" class="form-label">Almacen</label>
+                <select asp-for="IdAlmacen" asp-items="almacenes" class="form-select">
+                    <option value="">Seleccione un almacen</option>
+                </select>
+                <span asp-validation-for="IdAlmacen" class="text-danger"></span>
+            </div>
+            <div class="col-md-6">
+                <label asp-for="IdUbicacion" class="form-label">Ubicacion</label>
+                <select asp-for="IdUbicacion" asp-items="ubicaciones" class="form-select">
+                    <option value="">Seleccione una ubicacion</option>
+                </select>
+                <span asp-validation-for="IdUbicacion" class="text-danger"></span>
+            </div>
+            <div class="col-md-4">
+                <label asp-for="Cantidad" class="form-label">Cantidad</label>
+                <input asp-for="Cantidad" class="form-control" type="number" min="1" />
+                <span asp-validation-for="Cantidad" class="text-danger"></span>
+            </div>
+            <div class="col-md-4">
+                <label asp-for="CostoUnitario" class="form-label">Costo unitario</label>
+                <input asp-for="CostoUnitario" class="form-control" type="number" min="0" step="0.01" />
+                <span asp-validation-for="CostoUnitario" class="text-danger"></span>
+            </div>
+            <div class="col-md-4">
+                <label class="form-label">Estado</label>
+                <input class="form-control" value="Recepcion inmediata" readonly />
+            </div>
+            <div class="col-12">
+                <label asp-for="Observaciones" class="form-label">Observaciones</label>
+                <textarea asp-for="Observaciones" class="form-control" rows="3"></textarea>
+            </div>
+        </div>
+    </div>
+    <div class="card-footer bg-white d-flex justify-content-end gap-2">
+        <a asp-action="Index" class="btn btn-outline-secondary">Cancelar</a>
+        <button type="submit" class="btn btn-success" disabled="@(!productos.Any() || !proveedores.Any() || !almacenes.Any() || !ubicaciones.Any())">
+            Comprar y recibir
+        </button>
+    </div>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

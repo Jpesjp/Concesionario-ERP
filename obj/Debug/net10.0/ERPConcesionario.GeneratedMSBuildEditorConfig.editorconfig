@@ -46,6 +46,18 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2xpZW50ZXNcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/peril/Documents/Universidad/Semestre 5/Arquitectura de Software/ERPConcesionario/ERPConcesionario/Views/Clientes/Segmentacion.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2xpZW50ZXNcU2VnbWVudGFjaW9uLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/peril/Documents/Universidad/Semestre 5/Arquitectura de Software/ERPConcesionario/ERPConcesionario/Views/Compras/ComprarProducto.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29tcHJhc1xDb21wcmFyUHJvZHVjdG8uY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/peril/Documents/Universidad/Semestre 5/Arquitectura de Software/ERPConcesionario/ERPConcesionario/Views/Compras/ComprarStockCritico.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29tcHJhc1xDb21wcmFyU3RvY2tDcml0aWNvLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/peril/Documents/Universidad/Semestre 5/Arquitectura de Software/ERPConcesionario/ERPConcesionario/Views/Compras/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29tcHJhc1xJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
@@ -68,6 +80,10 @@ build_metadata.AdditionalFiles.CssScope =
 
 [C:/Users/peril/Documents/Universidad/Semestre 5/Arquitectura de Software/ERPConcesionario/ERPConcesionario/Views/Empleados/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRW1wbGVhZG9zXEluZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/peril/Documents/Universidad/Semestre 5/Arquitectura de Software/ERPConcesionario/ERPConcesionario/Views/Facturacion/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRmFjdHVyYWNpb25cSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/peril/Documents/Universidad/Semestre 5/Arquitectura de Software/ERPConcesionario/ERPConcesionario/Views/Home/Index.cshtml]
@@ -126,8 +142,16 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvdmVlZG9yZXNcRWRpdC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/peril/Documents/Universidad/Semestre 5/Arquitectura de Software/ERPConcesionario/ERPConcesionario/Views/Proveedores/Evaluar.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvdmVlZG9yZXNcRXZhbHVhci5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/peril/Documents/Universidad/Semestre 5/Arquitectura de Software/ERPConcesionario/ERPConcesionario/Views/Proveedores/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvdmVlZG9yZXNcSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/peril/Documents/Universidad/Semestre 5/Arquitectura de Software/ERPConcesionario/ERPConcesionario/Views/Proveedores/Ranking.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvdmVlZG9yZXNcUmFua2luZy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/peril/Documents/Universidad/Semestre 5/Arquitectura de Software/ERPConcesionario/ERPConcesionario/Views/RRHH/Index.cshtml]
@@ -156,6 +180,10 @@ build_metadata.AdditionalFiles.CssScope =
 
 [C:/Users/peril/Documents/Universidad/Semestre 5/Arquitectura de Software/ERPConcesionario/ERPConcesionario/Views/Vehiculos/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVmVoaWN1bG9zXEluZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/peril/Documents/Universidad/Semestre 5/Arquitectura de Software/ERPConcesionario/ERPConcesionario/Views/Ventas/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVmVudGFzXENyZWF0ZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/peril/Documents/Universidad/Semestre 5/Arquitectura de Software/ERPConcesionario/ERPConcesionario/Views/Ventas/Index.cshtml]

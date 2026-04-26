@@ -1,6 +1,132 @@
+@model IEnumerable<ERPConcesionario.Models.OrdenCompraListadoViewModel>
+
 @{
     ViewData["Title"] = "Compras";
-
+    var stockCritico = ViewBag.StockCritico as List<ERPConcesionario.Models.CompraCriticaViewModel> ?? new List<ERPConcesionario.Models.CompraCriticaViewModel>();
 }
-<h1>Compras</h1>
-<p>Módulo en construcción.</p>
+
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <div>
+        <h1 class="mb-1">Compras</h1>
+        <p class="text-muted mb-0">Ordenes de compra y reposicion de productos en stock critico.</p>
+    </div>
+    <div class="d-flex flex-wrap gap-2">
+        <a asp-action="ComprarProducto" class="btn btn-success">Nueva compra</a>
+        <a asp-controller="Inventario" asp-action="StockCritico" class="btn btn-outline-danger">Stock critico</a>
+        @if (stockCritico.Any())
+        {
+            <form asp-action="GenerarBorradorStockCritico" method="post">
+                <button type="submit" class="btn btn-primary">Generar borrador automatico</button>
+            </form>
+        }
+    </div>
+</div>
+
+@if (TempData["Mensaje"] != null)
+{
+    <div class="alert alert-success">@TempData["Mensaje"]</div>
+}
+
+@if (TempData["MensajeError"] != null)
+{
+    <div class="alert alert-danger">@TempData["MensajeError"]</div>
+}
+
+<div class="row g-4 mb-4">
+    <div class="col-lg-5">
+        <div class="card border-0 shadow-sm h-100">
+            <div class="card-body">
+                <h4 class="mb-3">Alertas para compra</h4>
+
+                @if (!stockCritico.Any())
+                {
+                    <div class="alert alert-success mb-0">No hay productos en stock critico.</div>
+                }
+                else
+                {
+                    <div class="table-responsive">
+                        <table class="table table-sm table-bordered align-middle">
+                            <thead class="table-light">
+                                <tr>
+                                    <th>Producto</th>
+                                    <th>Stock</th>
+                                    <th>Sugerido</th>
+                                    <th style="width: 170px;">Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in stockCritico)
+                                {
+                                    <tr>
+                                        <td>
+                                            <strong>@item.CodigoProducto</strong><br />
+                                            <span class="small">@item.NombreProducto</span>
+                                        </td>
+                                        <td>@item.StockActual / @item.StockMinimo</td>
+                                        <td>@item.CantidadSugerida</td>
+                                        <td>
+                                            <div class="d-flex flex-wrap gap-2">
+                                                <a asp-action="ComprarStockCritico" asp-route-id="@item.IdInventarioProducto" class="btn btn-success btn-sm">Comprar</a>
+                                                <a asp-action="ComprarProducto" asp-route-idInventarioProducto="@item.IdInventarioProducto" class="btn btn-outline-success btn-sm">Libre</a>
+                                                <form asp-action="GenerarBorradorStockCritico" asp-route-id="@item.IdInventarioProducto" method="post">
+                                                    <button type="submit" class="btn btn-outline-primary btn-sm">OC</button>
+                                                </form>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-7">
+        <div class="card border-0 shadow-sm h-100">
+            <div class="card-body">
+                <h4 class="mb-3">Ordenes de compra</h4>
+
+                @if (!Model.Any())
+                {
+                    <div class="alert alert-info mb-0">Aun no hay ordenes de compra registradas.</div>
+                }
+                else
+                {
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-striped table-hover align-middle">
+                            <thead class="table-dark">
+                                <tr>
+                                    <th>Numero</th>
+                                    <th>Proveedor</th>
+                                    <th>Fecha</th>
+                                    <th>Estado</th>
+                                    <th>Items</th>
+                                    <th>Total</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>@item.NumeroOrdenCompra</td>
+                                        <td>@item.Proveedor</td>
+                                        <td>@item.FechaOrden.ToString("yyyy-MM-dd")</td>
+                                        <td>
+                                            <span class="badge @(item.EstadoOrden == "RECIBIDA" ? "bg-success" : item.EstadoOrden == "BORRADOR" ? "bg-secondary" : "bg-primary")">
+                                                @item.EstadoOrden
+                                            </span>
+                                        </td>
+                                        <td>@item.TotalItems</td>
+                                        <td>@item.Total.ToString("N0")</td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>

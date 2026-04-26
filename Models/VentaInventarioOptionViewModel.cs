@@ -1,22 +1,18 @@
 namespace ERPConcesionario.Models
 {
-    public class StockCriticoViewModel
+    public class VentaInventarioOptionViewModel
     {
         public int IdInventarioProducto { get; set; }
         public int IdProducto { get; set; }
         public string CodigoProducto { get; set; } = string.Empty;
         public string NombreProducto { get; set; } = string.Empty;
-        public int StockMinimo { get; set; }
-        public int? StockMaximo { get; set; }
-        public int StockActual { get; set; }
         public string Almacen { get; set; } = string.Empty;
         public string Ubicacion { get; set; } = string.Empty;
+        public int StockActual { get; set; }
         public decimal PrecioVenta { get; set; }
-        public int CantidadSugerida { get; set; }
+        public decimal IVA { get; set; }
 
-        public string EstadoAlerta =>
-            StockActual == 0 ? "SIN STOCK" :
-            StockActual <= StockMinimo ? "STOCK CRITICO" :
-            "NORMAL";
+        public string Texto =>
+            CodigoProducto + " - " + NombreProducto + " | Stock: " + StockActual + " | " + Almacen + " / " + Ubicacion;
     }
 }

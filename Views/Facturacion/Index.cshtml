@@ -1,0 +1,100 @@
+@model IEnumerable<ERPConcesionario.Models.FacturaElectronicaViewModel>
+
+@{
+    ViewData["Title"] = "Facturacion";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <div>
+        <h1 class="mb-1">Facturacion Electronica</h1>
+        <p class="text-muted mb-0">Emision, firma digital simulada y envio al ente regulador.</p>
+    </div>
+    <a asp-controller="Ventas" asp-action="Index" class="btn btn-secondary">Ventas</a>
+</div>
+
+@if (TempData["Mensaje"] != null)
+{
+    <div class="alert alert-success">@TempData["Mensaje"]</div>
+}
+
+@if (TempData["MensajeError"] != null)
+{
+    <div class="alert alert-danger">@TempData["MensajeError"]</div>
+}
+
+@if (!Model.Any())
+{
+    <div class="alert alert-info">No hay ventas disponibles para facturar.</div>
+}
+else
+{
+    <div class="table-responsive">
+        <table class="table table-bordered table-striped table-hover align-middle">
+            <thead class="table-dark">
+                <tr>
+                    <th>Venta</th>
+                    <th>Cliente</th>
+                    <th>Fecha</th>
+                    <th>Total</th>
+                    <th>Factura</th>
+                    <th>Estado DIAN</th>
+                    <th>CUFE</th>
+                    <th style="width: 150px;">Accion</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    var cufeCorto = string.IsNullOrEmpty(item.Cufe)
+                        ? "Pendiente"
+                        : item.Cufe.Substring(0, Math.Min(18, item.Cufe.Length)) + "...";
+
+                    <tr>
+                        <td>
+                            <strong>@item.NumeroVenta</strong><br />
+                            <span class="small text-muted">@item.EstadoVenta</span>
+                        </td>
+                        <td>@item.Cliente</td>
+                        <td>@item.FechaVenta.ToString("yyyy-MM-dd")</td>
+                        <td>@item.Total.ToString("N0")</td>
+                        <td>
+                            @if (item.TieneFactura)
+                            {
+                                <strong>@item.NumeroFactura</strong><br />
+                                <span class="small text-muted">@item.EstadoFactura</span>
+                            }
+                            else
+                            {
+                                <span class="badge bg-secondary">Sin emitir</span>
+                            }
+                        </td>
+                        <td>
+                            <span class="badge @(item.EstadoEnvioDian == "ACEPTADA" ? "bg-success" : item.EstadoEnvioDian == "GENERADA" ? "bg-warning text-dark" : "bg-secondary")">
+                                @(item.EstadoEnvioDian ?? "Pendiente")
+                            </span>
+                        </td>
+                        <td class="small">@cufeCorto</td>
+                        <td>
+                            @if (!item.TieneFactura)
+                            {
+                                <form asp-action="Emitir" asp-route-id="@item.IdVenta" method="post">
+                                    <button type="submit" class="btn btn-primary btn-sm">Emitir</button>
+                                </form>
+                            }
+                            else if (item.EstadoEnvioDian != "ACEPTADA")
+                            {
+                                <form asp-action="EnviarDian" asp-route-id="@item.IdFacturaVenta" method="post">
+                                    <button type="submit" class="btn btn-success btn-sm">Enviar DIAN</button>
+                                </form>
+                            }
+                            else
+                            {
+                                <span class="text-success small">Enviada</span>
+                            }
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+}

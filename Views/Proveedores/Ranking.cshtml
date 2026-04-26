@@ -1,0 +1,62 @@
+@model IEnumerable<ERPConcesionario.Models.ProveedorEvaluacionViewModel>
+
+@{
+    ViewData["Title"] = "Ranking de Proveedores";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <div>
+        <h1 class="mb-1">Ranking de Proveedores</h1>
+        <p class="text-muted mb-0">Evaluacion por puntualidad de entrega y calidad de productos.</p>
+    </div>
+    <a asp-action="Index" class="btn btn-secondary">Volver</a>
+</div>
+
+@if (TempData["Mensaje"] != null)
+{
+    <div class="alert alert-success">@TempData["Mensaje"]</div>
+}
+
+<div class="table-responsive">
+    <table class="table table-bordered table-striped table-hover align-middle">
+        <thead class="table-dark">
+            <tr>
+                <th>#</th>
+                <th>Codigo</th>
+                <th>Proveedor</th>
+                <th>Tipo</th>
+                <th>Evaluaciones</th>
+                <th>Puntualidad</th>
+                <th>Calidad</th>
+                <th>Puntaje</th>
+                <th>Clasificacion</th>
+                <th>Ultima evaluacion</th>
+                <th style="width: 120px;">Accion</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.Posicion</td>
+                    <td>@item.CodigoProveedor</td>
+                    <td>@item.RazonSocial</td>
+                    <td>@item.TipoProveedor</td>
+                    <td>@item.CantidadEvaluaciones</td>
+                    <td>@item.PromedioPuntualidad.ToString("N2")</td>
+                    <td>@item.PromedioCalidad.ToString("N2")</td>
+                    <td>@item.PuntajeRanking.ToString("N2")</td>
+                    <td>
+                        <span class="badge @(item.Clasificacion == "Excelente" ? "bg-success" : item.Clasificacion == "Confiable" ? "bg-primary" : item.Clasificacion == "En seguimiento" ? "bg-warning text-dark" : item.Clasificacion == "Riesgo" ? "bg-danger" : "bg-secondary")">
+                            @item.Clasificacion
+                        </span>
+                    </td>
+                    <td>@(item.UltimaEvaluacion?.ToString("yyyy-MM-dd") ?? "Sin registro")</td>
+                    <td>
+                        <a asp-action="Evaluar" asp-route-id="@item.IdProveedor" class="btn btn-outline-primary btn-sm">Evaluar</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

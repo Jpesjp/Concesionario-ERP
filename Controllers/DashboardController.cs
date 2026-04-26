@@ -20,6 +20,7 @@ namespace ERPConcesionario.Controllers
             if (string.IsNullOrEmpty(HttpContext.Session.GetString("Username")))
                 return RedirectToAction("Login", "Account");
 
+            DatabaseSchemaHelper.EnsureVentasFacturacionTables(_connection);
 
             ViewBag.TotalClientes = ObtenerConteo("SELECT COUNT(*) FROM Clientes");
             ViewBag.TotalProveedores = ObtenerConteo("SELECT COUNT(*) FROM Proveedores");

@@ -1,0 +1,81 @@
+@model IEnumerable<ERPConcesionario.Models.ClienteSegmentacionViewModel>
+
+@{
+    ViewData["Title"] = "Segmentacion de Clientes";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <div>
+        <h1 class="mb-1">Segmentacion de Clientes</h1>
+        <p class="text-muted mb-0">Clasificacion A/B/C basada en valor historico y frecuencia de compra.</p>
+    </div>
+    <a asp-action="Index" class="btn btn-secondary">Volver</a>
+</div>
+
+<div class="row g-3 mb-4">
+    <div class="col-md-4">
+        <div class="card border-0 shadow-sm h-100">
+            <div class="card-body">
+                <h6 class="text-muted">Segmento A</h6>
+                <h2 class="fw-bold">@Model.Count(c => c.Segmento == "A")</h2>
+                <p class="mb-0 small">Clientes con mayor valor y frecuencia.</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card border-0 shadow-sm h-100">
+            <div class="card-body">
+                <h6 class="text-muted">Segmento B</h6>
+                <h2 class="fw-bold">@Model.Count(c => c.Segmento == "B")</h2>
+                <p class="mb-0 small">Clientes con potencial de crecimiento.</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card border-0 shadow-sm h-100">
+            <div class="card-body">
+                <h6 class="text-muted">Segmento C</h6>
+                <h2 class="fw-bold">@Model.Count(c => c.Segmento == "C")</h2>
+                <p class="mb-0 small">Clientes por activar o reactivar.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="table-responsive">
+    <table class="table table-bordered table-striped table-hover align-middle">
+        <thead class="table-dark">
+            <tr>
+                <th>Segmento</th>
+                <th>Codigo</th>
+                <th>Cliente</th>
+                <th>Tipo</th>
+                <th>Compras</th>
+                <th>Valor historico</th>
+                <th>Ultima compra</th>
+                <th>Puntaje</th>
+                <th>Campana sugerida</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        <span class="badge @(item.Segmento == "A" ? "bg-success" : item.Segmento == "B" ? "bg-primary" : "bg-secondary")">
+                            @item.Segmento
+                        </span>
+                    </td>
+                    <td>@item.CodigoCliente</td>
+                    <td>@item.NombreCliente</td>
+                    <td>@item.TipoCliente</td>
+                    <td>@item.CantidadCompras</td>
+                    <td>@item.ValorHistoricoCompras.ToString("N0")</td>
+                    <td>@(item.FechaUltimaCompra?.ToString("yyyy-MM-dd") ?? "Sin compras")</td>
+                    <td>@item.Puntaje.ToString("N2")</td>
+                    <td>@item.RecomendacionMarketing</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

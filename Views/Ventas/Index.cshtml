@@ -1,6 +1,75 @@
+@model IEnumerable<ERPConcesionario.Models.VentaListadoViewModel>
+
 @{
     ViewData["Title"] = "Ventas";
 }
 
-<h1>Ventas</h1>
-<p>Módulo en construcción.</p>
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <div>
+        <h1 class="mb-1">Ventas</h1>
+        <p class="text-muted mb-0">Registro de ventas de productos y preparacion para facturacion electronica.</p>
+    </div>
+    <div class="d-flex flex-wrap gap-2">
+        <a asp-action="Create" class="btn btn-primary">Nueva venta</a>
+        <a asp-controller="Facturacion" asp-action="Index" class="btn btn-outline-success">Facturacion</a>
+    </div>
+</div>
+
+@if (TempData["Mensaje"] != null)
+{
+    <div class="alert alert-success">@TempData["Mensaje"]</div>
+}
+
+@if (!Model.Any())
+{
+    <div class="alert alert-info">Aun no hay ventas registradas.</div>
+}
+else
+{
+    <div class="table-responsive">
+        <table class="table table-bordered table-striped table-hover align-middle">
+            <thead class="table-dark">
+                <tr>
+                    <th>Numero</th>
+                    <th>Cliente</th>
+                    <th>Vendedor</th>
+                    <th>Fecha</th>
+                    <th>Estado</th>
+                    <th>Items</th>
+                    <th>Total</th>
+                    <th>Factura</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.NumeroVenta</td>
+                        <td>@item.Cliente</td>
+                        <td>@item.Vendedor</td>
+                        <td>@item.FechaVenta.ToString("yyyy-MM-dd")</td>
+                        <td>
+                            <span class="badge @(item.EstadoVenta == "PENDIENTE" ? "bg-warning text-dark" : item.EstadoVenta == "FACTURADA" ? "bg-success" : "bg-secondary")">
+                                @item.EstadoVenta
+                            </span>
+                        </td>
+                        <td>@item.TotalItems</td>
+                        <td>@item.Total.ToString("N0")</td>
+                        <td>
+                            @if (item.TieneFactura)
+                            {
+                                <span class="badge bg-success">Emitida</span>
+                            }
+                            else
+                            {
+                                <form asp-controller="Facturacion" asp-action="Emitir" asp-route-id="@item.IdVenta" method="post">
+                                    <button type="submit" class="btn btn-outline-primary btn-sm">Emitir</button>
+                                </form>
+                            }
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+}

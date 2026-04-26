@@ -64,6 +64,122 @@ namespace ERPConcesionario.Controllers
             return View(proveedores);
         }
 
+        public IActionResult Ranking()
+        {
+            var acceso = AutorizacionHelper.ValidarSesionYRol(this, "Admin", "Compras");
+            if (acceso != null) return acceso;
+
+            EnsureEvaluacionesProveedorTable();
+            var ranking = new List<ProveedorEvaluacionViewModel>();
+
+            string query = @"
+                SELECT
+                    p.IdProveedor,
+                    p.CodigoProveedor,
+                    p.RazonSocial,
+                    p.TipoProveedor,
+                    COUNT(e.IdEvaluacionProveedor) AS CantidadEvaluaciones,
+                    ISNULL(AVG(CAST(e.PuntualidadEntrega AS DECIMAL(10,2))), 0) AS PromedioPuntualidad,
+                    ISNULL(AVG(CAST(e.CalidadProductos AS DECIMAL(10,2))), 0) AS PromedioCalidad,
+                    MAX(e.FechaEvaluacion) AS UltimaEvaluacion
+                FROM Proveedores p
+                LEFT JOIN EvaluacionesProveedor e
+                    ON p.IdProveedor = e.IdProveedor
+                GROUP BY p.IdProveedor, p.CodigoProveedor, p.RazonSocial, p.TipoProveedor;";
+
+            using (SqlCommand cmd = new SqlCommand(query, _connection))
+            {
+                _connection.Open();
+                var reader = cmd.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    int cantidadEvaluaciones = Convert.ToInt32(reader["CantidadEvaluaciones"]);
+                    decimal puntualidad = Convert.ToDecimal(reader["PromedioPuntualidad"]);
+                    decimal calidad = Convert.ToDecimal(reader["PromedioCalidad"]);
+                    decimal puntaje = cantidadEvaluaciones == 0 ? 0 : Math.Round(((puntualidad + calidad) / 2) * 20, 2);
+
+                    ranking.Add(new ProveedorEvaluacionViewModel
+                    {
+                        IdProveedor = Convert.ToInt32(reader["IdProveedor"]),
+                        CodigoProveedor = reader["CodigoProveedor"].ToString() ?? "",
+                        RazonSocial = reader["RazonSocial"].ToString() ?? "",
+                        TipoProveedor = reader["TipoProveedor"].ToString() ?? "",
+                        CantidadEvaluaciones = cantidadEvaluaciones,
+                        PromedioPuntualidad = puntualidad,
+                        PromedioCalidad = calidad,
+                        PuntajeRanking = puntaje,
+                        UltimaEvaluacion = reader["UltimaEvaluacion"] == DBNull.Value ? null : Convert.ToDateTime(reader["UltimaEvaluacion"]),
+                        Clasificacion = ObtenerClasificacionProveedor(cantidadEvaluaciones, puntaje)
+                    });
+                }
+
+                _connection.Close();
+            }
+
+            ranking = ranking
+                .OrderByDescending(p => p.PuntajeRanking)
+                .ThenBy(p => p.RazonSocial)
+                .ToList();
+
+            for (int i = 0; i < ranking.Count; i++)
+                ranking[i].Posicion = i + 1;
+
+            return View(ranking);
+        }
+
+        public IActionResult Evaluar(int id)
+        {
+            var acceso = AutorizacionHelper.ValidarSesionYRol(this, "Admin", "Compras");
+            if (acceso != null) return acceso;
+
+            var proveedor = ObtenerProveedorParaEvaluacion(id);
+            if (proveedor == null)
+                return NotFound();
+
+            return View(proveedor);
+        }
+
+        [HttpPost]
+        public IActionResult Evaluar(ProveedorEvaluacionInputModel model)
+        {
+            var acceso = AutorizacionHelper.ValidarSesionYRol(this, "Admin", "Compras");
+            if (acceso != null) return acceso;
+
+            var proveedor = ObtenerProveedorParaEvaluacion(model.IdProveedor);
+            if (proveedor == null)
+                return NotFound();
+
+            model.CodigoProveedor = proveedor.CodigoProveedor;
+            model.RazonSocial = proveedor.RazonSocial;
+
+            if (!ModelState.IsValid)
+                return View(model);
+
+            EnsureEvaluacionesProveedorTable();
+
+            string query = @"
+                INSERT INTO EvaluacionesProveedor
+                    (IdProveedor, FechaEvaluacion, PuntualidadEntrega, CalidadProductos, Observaciones)
+                VALUES
+                    (@IdProveedor, GETDATE(), @PuntualidadEntrega, @CalidadProductos, @Observaciones);";
+
+            using (SqlCommand cmd = new SqlCommand(query, _connection))
+            {
+                cmd.Parameters.AddWithValue("@IdProveedor", model.IdProveedor);
+                cmd.Parameters.AddWithValue("@PuntualidadEntrega", model.PuntualidadEntrega);
+                cmd.Parameters.AddWithValue("@CalidadProductos", model.CalidadProductos);
+                cmd.Parameters.AddWithValue("@Observaciones", (object?)model.Observaciones ?? DBNull.Value);
+
+                _connection.Open();
+                cmd.ExecuteNonQuery();
+                _connection.Close();
+            }
+
+            TempData["Mensaje"] = "Evaluacion registrada correctamente.";
+            return RedirectToAction("Ranking");
+        }
+
         public IActionResult Create()
         {
             var acceso = AutorizacionHelper.ValidarSesionYRol(this, "Admin", "Compras");
@@ -284,6 +400,86 @@ namespace ERPConcesionario.Controllers
             }
 
             return RedirectToAction("Index");
+        }
+
+        private void EnsureEvaluacionesProveedorTable()
+        {
+            string query = @"
+                IF OBJECT_ID('dbo.EvaluacionesProveedor', 'U') IS NULL
+                BEGIN
+                    CREATE TABLE dbo.EvaluacionesProveedor (
+                        IdEvaluacionProveedor INT IDENTITY(1,1) PRIMARY KEY,
+                        IdProveedor INT NOT NULL,
+                        FechaEvaluacion DATETIME NOT NULL DEFAULT GETDATE(),
+                        PuntualidadEntrega INT NOT NULL CHECK (PuntualidadEntrega BETWEEN 1 AND 5),
+                        CalidadProductos INT NOT NULL CHECK (CalidadProductos BETWEEN 1 AND 5),
+                        Observaciones NVARCHAR(500) NULL,
+                        CONSTRAINT FK_EvaluacionesProveedor_Proveedores
+                            FOREIGN KEY (IdProveedor) REFERENCES Proveedores(IdProveedor)
+                    );
+                END";
+
+            bool cerrarConexion = _connection.State != System.Data.ConnectionState.Open;
+
+            using (SqlCommand cmd = new SqlCommand(query, _connection))
+            {
+                if (cerrarConexion)
+                    _connection.Open();
+
+                cmd.ExecuteNonQuery();
+
+                if (cerrarConexion)
+                    _connection.Close();
+            }
+        }
+
+        private ProveedorEvaluacionInputModel? ObtenerProveedorParaEvaluacion(int id)
+        {
+            ProveedorEvaluacionInputModel? proveedor = null;
+
+            string query = @"
+                SELECT IdProveedor, CodigoProveedor, RazonSocial
+                FROM Proveedores
+                WHERE IdProveedor = @IdProveedor;";
+
+            using (SqlCommand cmd = new SqlCommand(query, _connection))
+            {
+                cmd.Parameters.AddWithValue("@IdProveedor", id);
+
+                _connection.Open();
+                var reader = cmd.ExecuteReader();
+
+                if (reader.Read())
+                {
+                    proveedor = new ProveedorEvaluacionInputModel
+                    {
+                        IdProveedor = Convert.ToInt32(reader["IdProveedor"]),
+                        CodigoProveedor = reader["CodigoProveedor"].ToString() ?? "",
+                        RazonSocial = reader["RazonSocial"].ToString() ?? ""
+                    };
+                }
+
+                _connection.Close();
+            }
+
+            return proveedor;
+        }
+
+        private static string ObtenerClasificacionProveedor(int cantidadEvaluaciones, decimal puntaje)
+        {
+            if (cantidadEvaluaciones == 0)
+                return "Sin datos";
+
+            if (puntaje >= 90)
+                return "Excelente";
+
+            if (puntaje >= 75)
+                return "Confiable";
+
+            if (puntaje >= 60)
+                return "En seguimiento";
+
+            return "Riesgo";
         }
     }
 }

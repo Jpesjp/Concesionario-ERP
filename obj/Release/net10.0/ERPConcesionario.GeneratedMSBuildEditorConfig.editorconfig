@@ -22,6 +22,14 @@ build_property._RazorSourceGeneratorDebug =
 build_property.EffectiveAnalysisLevelStyle = 10.0
 build_property.EnableCodeStyleSeverity = 
 
+[C:/Users/peril/Documents/Universidad/Semestre 5/Arquitectura de Software/ERPConcesionario/ERPConcesionario/Views/Account/AccesoDenegado.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxBY2Nlc29EZW5lZ2Fkby5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/peril/Documents/Universidad/Semestre 5/Arquitectura de Software/ERPConcesionario/ERPConcesionario/Views/Account/Login.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxMb2dpbi5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/peril/Documents/Universidad/Semestre 5/Arquitectura de Software/ERPConcesionario/ERPConcesionario/Views/Clientes/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2xpZW50ZXNcQ3JlYXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
@@ -72,6 +80,22 @@ build_metadata.AdditionalFiles.CssScope =
 
 [C:/Users/peril/Documents/Universidad/Semestre 5/Arquitectura de Software/ERPConcesionario/ERPConcesionario/Views/Inventario/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSW52ZW50YXJpb1xJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/peril/Documents/Universidad/Semestre 5/Arquitectura de Software/ERPConcesionario/ERPConcesionario/Views/Inventario/StockCritico.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSW52ZW50YXJpb1xTdG9ja0NyaXRpY28uY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/peril/Documents/Universidad/Semestre 5/Arquitectura de Software/ERPConcesionario/ERPConcesionario/Views/Nominas/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTm9taW5hc1xDcmVhdGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/peril/Documents/Universidad/Semestre 5/Arquitectura de Software/ERPConcesionario/ERPConcesionario/Views/Nominas/Detalle.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTm9taW5hc1xEZXRhbGxlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/peril/Documents/Universidad/Semestre 5/Arquitectura de Software/ERPConcesionario/ERPConcesionario/Views/Nominas/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTm9taW5hc1xJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/peril/Documents/Universidad/Semestre 5/Arquitectura de Software/ERPConcesionario/ERPConcesionario/Views/Productos/Create.cshtml]

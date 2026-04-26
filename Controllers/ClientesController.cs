@@ -70,6 +70,82 @@ namespace ERPConcesionario.Controllers
             return View(clientes);
         }
 
+        public IActionResult Segmentacion()
+        {
+            var acceso = AutorizacionHelper.ValidarSesionYRol(this, "Admin", "Ventas");
+            if (acceso != null) return acceso;
+
+            DatabaseSchemaHelper.EnsureVentasFacturacionTables(_connection);
+            var clientes = new List<ClienteSegmentacionViewModel>();
+
+            string query = @"
+                SELECT
+                    c.IdCliente,
+                    c.CodigoCliente,
+                    c.TipoCliente,
+                    CASE
+                        WHEN c.TipoCliente = 'NATURAL'
+                            THEN LTRIM(RTRIM(ISNULL(c.Nombres, '') + ' ' + ISNULL(c.Apellidos, '')))
+                        ELSE ISNULL(c.RazonSocial, ISNULL(c.NombreComercial, 'Cliente empresa'))
+                    END AS NombreCliente,
+                    COUNT(v.IdVenta) AS CantidadCompras,
+                    ISNULL(SUM(v.Total), 0) AS ValorHistoricoCompras,
+                    MAX(v.FechaVenta) AS FechaUltimaCompra
+                FROM Clientes c
+                LEFT JOIN Ventas v
+                    ON c.IdCliente = v.IdCliente
+                   AND v.EstadoVenta <> 'ANULADA'
+                GROUP BY c.IdCliente, c.CodigoCliente, c.TipoCliente, c.Nombres, c.Apellidos, c.RazonSocial, c.NombreComercial
+                ORDER BY ValorHistoricoCompras DESC, CantidadCompras DESC, NombreCliente ASC;";
+
+            using (SqlCommand cmd = new SqlCommand(query, _connection))
+            {
+                _connection.Open();
+                var reader = cmd.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    clientes.Add(new ClienteSegmentacionViewModel
+                    {
+                        IdCliente = Convert.ToInt32(reader["IdCliente"]),
+                        CodigoCliente = reader["CodigoCliente"].ToString() ?? "",
+                        TipoCliente = reader["TipoCliente"].ToString() ?? "",
+                        NombreCliente = reader["NombreCliente"].ToString() ?? "",
+                        CantidadCompras = Convert.ToInt32(reader["CantidadCompras"]),
+                        ValorHistoricoCompras = Convert.ToDecimal(reader["ValorHistoricoCompras"]),
+                        FechaUltimaCompra = reader["FechaUltimaCompra"] == DBNull.Value ? null : Convert.ToDateTime(reader["FechaUltimaCompra"])
+                    });
+                }
+
+                _connection.Close();
+            }
+
+            decimal maxValor = clientes.Any() ? clientes.Max(c => c.ValorHistoricoCompras) : 0;
+            int maxFrecuencia = clientes.Any() ? clientes.Max(c => c.CantidadCompras) : 0;
+
+            foreach (var cliente in clientes)
+            {
+                decimal puntajeValor = maxValor > 0 ? cliente.ValorHistoricoCompras / maxValor * 70 : 0;
+                decimal puntajeFrecuencia = maxFrecuencia > 0 ? (decimal)cliente.CantidadCompras / maxFrecuencia * 30 : 0;
+                cliente.Puntaje = Math.Round(puntajeValor + puntajeFrecuencia, 2);
+
+                cliente.Segmento = cliente.Puntaje >= 70 ? "A" :
+                                   cliente.Puntaje >= 35 ? "B" :
+                                   "C";
+
+                cliente.RecomendacionMarketing = cliente.Segmento switch
+                {
+                    "A" => "Fidelizacion premium, preventa y beneficios exclusivos.",
+                    "B" => "Cross-selling, mantenimiento programado y bonos de recompra.",
+                    _ => cliente.CantidadCompras == 0
+                        ? "Campana de activacion y primera compra."
+                        : "Campana de reactivacion con oferta puntual."
+                };
+            }
+
+            return View(clientes.OrderBy(c => c.Segmento).ThenByDescending(c => c.Puntaje).ToList());
+        }
+
         public IActionResult Create()
         {
             var acceso = AutorizacionHelper.ValidarSesionYRol(this, "Admin", "Ventas");

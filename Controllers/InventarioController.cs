@@ -29,10 +29,12 @@ namespace ERPConcesionario.Controllers
 
             string query = @"
                 SELECT 
+                    i.IdInventarioProducto,
                     p.IdProducto,
                     p.CodigoProducto,
                     p.Nombre AS NombreProducto,
                     p.StockMinimo,
+                    p.StockMaximo,
                     i.StockActual,
                     a.Nombre AS Almacen,
                     u.Nombre AS Ubicacion,
@@ -53,14 +55,20 @@ namespace ERPConcesionario.Controllers
                 {
                     lista.Add(new StockCriticoViewModel
                     {
+                        IdInventarioProducto = Convert.ToInt32(reader["IdInventarioProducto"]),
                         IdProducto = Convert.ToInt32(reader["IdProducto"]),
                         CodigoProducto = reader["CodigoProducto"].ToString() ?? "",
                         NombreProducto = reader["NombreProducto"].ToString() ?? "",
                         StockMinimo = Convert.ToInt32(reader["StockMinimo"]),
+                        StockMaximo = reader["StockMaximo"] == DBNull.Value ? null : Convert.ToInt32(reader["StockMaximo"]),
                         StockActual = Convert.ToInt32(reader["StockActual"]),
                         Almacen = reader["Almacen"].ToString() ?? "",
                         Ubicacion = reader["Ubicacion"].ToString() ?? "",
-                        PrecioVenta = Convert.ToDecimal(reader["PrecioVenta"])
+                        PrecioVenta = Convert.ToDecimal(reader["PrecioVenta"]),
+                        CantidadSugerida = CalcularCantidadSugerida(
+                            Convert.ToInt32(reader["StockActual"]),
+                            Convert.ToInt32(reader["StockMinimo"]),
+                            reader["StockMaximo"] == DBNull.Value ? null : Convert.ToInt32(reader["StockMaximo"]))
                     });
                 }
 
@@ -68,6 +76,15 @@ namespace ERPConcesionario.Controllers
             }
 
             return View(lista);
+        }
+
+        private static int CalcularCantidadSugerida(int stockActual, int stockMinimo, int? stockMaximo)
+        {
+            int objetivo = stockMaximo.HasValue && stockMaximo.Value > stockMinimo
+                ? stockMaximo.Value
+                : Math.Max(stockMinimo * 2, stockMinimo + 1);
+
+            return Math.Max(1, objetivo - stockActual);
         }
     }
 }

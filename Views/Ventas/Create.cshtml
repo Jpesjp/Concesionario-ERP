@@ -1,0 +1,111 @@
+@model ERPConcesionario.Models.VentaProductoFormViewModel
+
+@{
+    ViewData["Title"] = "Nueva Venta";
+    var clientes = ViewBag.Clientes as List<Microsoft.AspNetCore.Mvc.Rendering.SelectListItem> ?? new List<Microsoft.AspNetCore.Mvc.Rendering.SelectListItem>();
+    var productos = ViewBag.ProductosInventario as List<ERPConcesionario.Models.VentaInventarioOptionViewModel> ?? new List<ERPConcesionario.Models.VentaInventarioOptionViewModel>();
+}
+
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <div>
+        <h1 class="mb-1">Nueva Venta</h1>
+        <p class="text-muted mb-0">Selecciona cliente, producto disponible y cantidad a vender.</p>
+    </div>
+    <a asp-action="Index" class="btn btn-secondary">Volver</a>
+</div>
+
+@if (!clientes.Any())
+{
+    <div class="alert alert-danger">No hay clientes activos para registrar ventas.</div>
+}
+
+@if (!productos.Any())
+{
+    <div class="alert alert-warning">No hay productos con stock disponible para vender.</div>
+}
+
+<form asp-action="Create" method="post" class="card border-0 shadow-sm">
+    <div class="card-body">
+        <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+        <div class="row g-3">
+            <div class="col-md-6">
+                <label asp-for="IdCliente" class="form-label">Cliente</label>
+                <select asp-for="IdCliente" asp-items="clientes" class="form-select">
+                    <option value="">Seleccione un cliente</option>
+                </select>
+                <span asp-validation-for="IdCliente" class="text-danger"></span>
+            </div>
+            <div class="col-md-6">
+                <label asp-for="IdInventarioProducto" class="form-label">Producto disponible</label>
+                <select asp-for="IdInventarioProducto" class="form-select" id="productoVenta">
+                    <option value="">Seleccione un producto</option>
+                    @foreach (var producto in productos)
+                    {
+                        <option value="@producto.IdInventarioProducto"
+                                data-price="@producto.PrecioVenta.ToString(System.Globalization.CultureInfo.InvariantCulture)"
+                                data-stock="@producto.StockActual"
+                                selected="@(Model.IdInventarioProducto == producto.IdInventarioProducto ? "selected" : null)">
+                            @producto.Texto
+                        </option>
+                    }
+                </select>
+                <span asp-validation-for="IdInventarioProducto" class="text-danger"></span>
+            </div>
+            <div class="col-md-3">
+                <label asp-for="Cantidad" class="form-label">Cantidad</label>
+                <input asp-for="Cantidad" class="form-control" min="1" type="number" />
+                <span asp-validation-for="Cantidad" class="text-danger"></span>
+            </div>
+            <div class="col-md-3">
+                <label asp-for="PrecioUnitario" class="form-label">Precio unitario</label>
+                <input asp-for="PrecioUnitario" class="form-control" min="0" step="0.01" type="number" id="precioVenta" />
+                <span asp-validation-for="PrecioUnitario" class="text-danger"></span>
+            </div>
+            <div class="col-md-3">
+                <label asp-for="DescuentoLinea" class="form-label">Descuento</label>
+                <input asp-for="DescuentoLinea" class="form-control" min="0" step="0.01" type="number" />
+                <span asp-validation-for="DescuentoLinea" class="text-danger"></span>
+            </div>
+            <div class="col-md-3">
+                <label class="form-label">Stock seleccionado</label>
+                <input class="form-control" id="stockSeleccionado" readonly />
+            </div>
+            <div class="col-12">
+                <label asp-for="Observaciones" class="form-label">Observaciones</label>
+                <textarea asp-for="Observaciones" class="form-control" rows="3"></textarea>
+            </div>
+        </div>
+    </div>
+    <div class="card-footer bg-white d-flex justify-content-end gap-2">
+        <a asp-action="Index" class="btn btn-outline-secondary">Cancelar</a>
+        <button type="submit" class="btn btn-primary" disabled="@(!clientes.Any() || !productos.Any())">Registrar venta</button>
+    </div>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    <script>
+        const productoVenta = document.getElementById('productoVenta');
+        const precioVenta = document.getElementById('precioVenta');
+        const stockSeleccionado = document.getElementById('stockSeleccionado');
+
+        function actualizarProductoVenta() {
+            const option = productoVenta.options[productoVenta.selectedIndex];
+            if (!option || !option.value) {
+                stockSeleccionado.value = '';
+                return;
+            }
+
+            const price = option.getAttribute('data-price');
+            const stock = option.getAttribute('data-stock');
+            if (!precioVenta.value || Number(precioVenta.value) === 0) {
+                precioVenta.value = price;
+            }
+            stockSeleccionado.value = stock;
+        }
+
+        productoVenta.addEventListener('change', actualizarProductoVenta);
+        actualizarProductoVenta();
+    </script>
+}

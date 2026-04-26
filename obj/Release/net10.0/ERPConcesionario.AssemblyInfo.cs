@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("ERPConcesionario")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Release")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+b3872c6acf5772e7c7d5000db563c6c7c7a9dc39")]
 [assembly: System.Reflection.AssemblyProductAttribute("ERPConcesionario")]
 [assembly: System.Reflection.AssemblyTitleAttribute("ERPConcesionario")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
